@@ -1,0 +1,131 @@
+﻿@model IEnumerable<cellphones.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    @Styles.Render("~/Content/main.css");
+}
+
+<div class="search-container">
+    <div class="search-form-container" style="display: flex; flex-direction: row;margin:auto">
+        @using (Html.BeginForm("Search", "Admin", FormMethod.Get, new { @class = "search-form" }))
+        {
+            <input type="text" placeholder="Tìm kiếm theo tên sản phẩm" name="searchString">
+            <button type="submit">
+                <i class="fa fa-search"></i>
+                Tìm kiếm
+            </button>}
+        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "create-link" })
+    </div>
+   
+</div>
+<h4>Danh sách sản phẩm</h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryID)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "action-button edit-button" })
+                @Html.ActionLink("Details", "Detail", new { id = item.ProductID }, new { @class = "action-button details-button" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "action-button delete-button" })
+            </td>
+        </tr>
+    }
+
+</table>
+<style>
+    .action-button {
+        padding: 5px 10px;
+        margin: 0 3px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        display: inline-block;
+        border: 1px solid;
+    }
+
+    /* Nút Edit */
+    .edit-button {
+        color: #2196F3;
+        border-color: #2196F3;
+        background-color: transparent;
+    }
+
+        .edit-button:hover {
+            background-color: #2196F3;
+            color: white;
+        }
+
+    /* Nút Details */
+    .details-button {
+        color: #4CAF50;
+        border-color: #4CAF50;
+        background-color: transparent;
+    }
+
+        .details-button:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+    /* Nút Delete */
+    .delete-button {
+        color: #F44336;
+        border-color: #F44336;
+        background-color: transparent;
+    }
+
+        .delete-button:hover {
+            background-color: #F44336;
+            color: white;
+        }
+
+</style>
+

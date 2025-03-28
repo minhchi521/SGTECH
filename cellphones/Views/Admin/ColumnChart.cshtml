@@ -1,0 +1,191 @@
+﻿@model IEnumerable<cellphones.Models.sale>
+
+<style>
+    .stats-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+    .card-title {
+        color: #495057;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .card-text {
+        color: #2c3e50;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .stats-icon {
+        font-size: 2rem;
+        opacity: 0.1;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    .chart-container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .table-container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .table th {
+        background: #f8f9fa;
+        border-bottom: 2px solid #dee2e6;
+        color: #495057;
+        font-weight: 600;
+    }
+
+    .table td {
+        vertical-align: middle;
+    }
+
+    .status-badge {
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .status-pending {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    .status-success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .amount-col {
+        font-family: 'Roboto Mono', monospace;
+        font-weight: 500;
+    }
+</style>
+
+<div class="container py-4">
+    <!-- Biểu đồ -->
+    <div class="row mb-2">
+        <div class="col-5">
+            <div class="chart-container">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <!-- Thống kê tổng quan -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card stats-card mb-3">
+                <div class="card-body position-relative">
+                    <i class="fas fa-money-bill-wave stats-icon"></i>
+                    <h5 class="card-title mb-3">Tổng Doanh Thu</h5>
+                    <p class="card-text">@ViewBag.TongTien.ToString("N0") VNĐ</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card stats-card mb-3">
+                <div class="card-body position-relative">
+                    <i class="fas fa-exchange-alt stats-icon"></i>
+                    <h5 class="card-title mb-3">Số Giao Dịch</h5>
+                    <p class="card-text">@ViewBag.SoGiaoDich</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card stats-card mb-3">
+                <div class="card-body position-relative">
+                    <i class="fas fa-chart-line stats-icon"></i>
+                    <h5 class="card-title mb-3">Trung Bình/Giao Dịch</h5>
+                    <p class="card-text">@ViewBag.TrungBinhGiaoDich.ToString("N0") VNĐ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <script>
+        var labels = @Html.Raw(ViewBag.Labels);
+        var data = @Html.Raw(ViewBag.Data);
+
+        var ctx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Doanh Thu Theo Tháng',
+                    data: data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Doanh Thu (VNĐ)',
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            drawBorder: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Thống Kê Doanh Thu Theo Tháng',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        },
+                        padding: 20
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'Doanh thu: ' + context.raw.toLocaleString() + ' VNĐ';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

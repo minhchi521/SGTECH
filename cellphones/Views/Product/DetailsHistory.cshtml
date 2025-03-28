@@ -1,0 +1,545 @@
+﻿@model IEnumerable<cellphones.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "DetailsHistory";
+    Layout = "~/Views/Shared/_LayoutUser2.cshtml";
+}
+
+
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="#" class="menu-item active">
+            <i class="fas fa-home"></i>
+            Trang chủ
+        </a>
+        <a href="/Product/HistoryBuyProduct" class="menu-item">
+            <i class="fas fa-history"></i>
+            Lịch sử mua hàng
+        </a>
+        <a href="#" class="menu-item">
+            <i class="fas fa-shield-alt"></i>
+            Tra cứu bảo hành
+        </a>
+        <a href="/Product/offers" class="menu-item">
+            <i class="fas fa-gift"></i>
+            Ưu đãi của bạn
+        </a>
+        <a href="#" class="menu-item">
+            <i class="fas fa-graduation-cap"></i>
+            Chương trình S-Edu
+            <span class="badge">HOT</span>
+        </a>
+        <a href="#" class="menu-item">
+            <i class="fas fa-medal"></i>
+            Hạng thành viên
+        </a>
+        <a href="/Product/EditProfile" class="menu-item">
+            <i class="fas fa-user"></i>
+            Tài khoản của bạn
+        </a>
+        <a href="#" class="menu-item">
+            <i class="fas fa-link"></i>
+            Liên kết tài khoản
+            <span class="badge">MỚI</span>
+        </a>
+        <a href="/Chat/Messages" class="menu-item">
+            <i class="fas fa-headset"></i>
+            Hỗ trợ
+        </a>
+        <a href="#" class="menu-item">
+            <i class="fas fa-comment-dots"></i>
+            Góp ý - Phản hồi
+        </a>
+        <a href="/Account/logout" class="menu-item">
+            <i class="fas fa-comment"></i>
+            Đăng xuất
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="profile-card">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnitPrice)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitPrice)
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        const imagePreview = document.getElementById("imagePreview");
+        reader.onload = function () {
+            imagePreview.src = reader.result;
+        }
+        if (event.target.files[0]) {
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    }
+
+    document.getElementById('profileForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Form validation would go here
+
+        // Simulate success
+        alert('Thông tin tài khoản đã được cập nhật thành công!');
+    });
+</script>
+<style>
+
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    /* Header */
+    .header {
+        width: 100%;
+        background-color: white;
+        padding: 10px 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+        background: var(--secondary-color);
+        border-radius: 4px;
+        padding: 5px 10px;
+        width: 300px;
+    }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            padding: 8px;
+            outline: none;
+        }
+
+        .search-bar button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+    .user-menu {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .user-name {
+        font-weight: 500;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 280px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 20px 0;
+    }
+
+    .menu-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        color: var(--text-color);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+        .menu-item:hover {
+            background-color: #f8f8f8;
+            color: var(--primary-color);
+        }
+
+        .menu-item.active {
+            color: var(--primary-color);
+            background-color: #fff1f1;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .menu-item i {
+            width: 24px;
+            margin-right: 10px;
+            text-align: center;
+        }
+
+    .badge {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        background-color: var(--primary-color);
+        color: white;
+        font-size: 10px;
+        padding: 2px 6px;
+        border-radius: 10px;
+    }
+
+    /* Main Content */
+    .main-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .profile-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 30px;
+        margin-bottom: 20px;
+    }
+
+    .profile-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .avatar-wrapper {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin-bottom: 15px;
+    }
+
+    #imagePreview {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #f0f0f0;
+    }
+
+    .avatar-upload {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-color: var(--primary-color);
+        color: white;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .avatar-upload:hover {
+            background-color: #b80012;
+        }
+
+    .profile-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        gap: 10px;
+    }
+
+    .user-name {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .user-id {
+        color: #777;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+    }
+
+    .status-badge {
+        background-color: #eee;
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        margin-left: 10px;
+    }
+
+    .stats-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 20px;
+    }
+
+    .stat-box {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .stat-label {
+        color: #777;
+        font-size: 14px;
+    }
+
+    .info-message {
+        background-color: var(--light-blue);
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .info-message i {
+            color: #1a73e8;
+            font-size: 20px;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        position: relative;
+    }
+
+    .input-icon {
+        position: relative;
+    }
+
+        .input-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+    .form-input {
+        width: 100%;
+        padding: 12px 12px 12px 40px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+    .text-danger {
+        color: var(--primary-color);
+        font-size: 14px;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .save-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .save-btn:hover {
+            background-color: #b80012;
+        }
+
+    .feature-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .feature-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        padding: 15px 10px;
+        text-decoration: none;
+        color: var(--text-color);
+        transition: all 0.3s ease;
+    }
+
+        .feature-button:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .feature-button i {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .feature-button.hot::after {
+            content: 'HOT';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        .feature-button.new::after {
+            content: 'MỚI';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #1a73e8;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+    .barcode-section {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .barcode-img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .barcode-info {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #777;
+    }
+
+    .qrcode-btn {
+        margin-top: 10px;
+        padding: 8px 15px;
+        background-color: white;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    /* Responsive */
+    @@media (max-width: 992px) {
+        .container {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 100%;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .header-content {
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .search-bar {
+            order: 3;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .stats-container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

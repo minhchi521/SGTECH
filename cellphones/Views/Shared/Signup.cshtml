@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SGTech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            background: linear-gradient(135deg, #0099ff 0%, #001640 100%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-section {
+            flex: 1;
+            padding-right: 50px;
+        }
+
+        .brand-name {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+            .brand-name span {
+                color: #00ffff;
+            }
+
+        .laptop-display {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 500px;
+        }
+
+        .app-icons {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .app-icon {
+            width: 40px;
+            height: 40px;
+            background: #f0f0f0;
+            border-radius: 8px;
+        }
+
+        .login-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 400px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .btn-default {
+            width: 100%;
+            padding: 12px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .social-login {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            color: black;
+            text-decoration: none;
+            background: white;
+            cursor: pointer;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .register-link a {
+                color: #0099ff;
+                text-decoration: none;
+            }
+
+        .control-label {
+            display: none;
+        }
+
+        .col-md-10 {
+            width: 100%;
+        }
+
+        .text-danger {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        h2, h4, hr {
+            display: none;
+        }
+    </style>
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <div class="brand-section">
+            <h1 class="brand-name">SG<span>Tech</span></h1>
+            <div class="laptop-display">
+                <div class="app-icons">
+                    <div class="app-icon"></div>
+                    <div class="app-icon"></div>
+                    <div class="app-icon"></div>
+                    <div class="app-icon"></div>
+                    <div class="app-icon"></div>
+                    <div class="app-icon"></div>
+                    <div class="app-icon"></div>
+                    <div class="app-icon"></div>
+                    <div class="app-icon"></div>
+                    <div class="app-icon"></div>
+                    <div class="app-icon"></div>
+                    <div class="app-icon"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-section">
+            <div class="login-header">
+                <h2>Đăng ký tài khoản của bạn</h2>
+            </div>
+            @RenderBody()
+        <div class="social-login">
+            <p>Hoặc</p>
+            <a href="@Url.Action("GoogleLogin", "Account")" class="social-btn">
+                <img src="~/Content/icon/icons8-google.svg" alt="google">
+                Đăng nhập với Google
+            </a>
+            <button class="social-btn">
+                <img src="~/Content/icon/icons8-facebook.svg" alt="facebook">
+                Đăng ký với Facebook
+            </button>
+        </div>
+
+            <div class="register-link">
+                <p>Bạn đã có tài khoản <a href="/Account/Index">Đăng nhập ngay</a></p>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

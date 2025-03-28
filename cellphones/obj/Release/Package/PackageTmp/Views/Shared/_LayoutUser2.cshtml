@@ -1,0 +1,996 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGTECH WEBSITE</title>
+    @*@Styles.Render("~/Content/css")*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <div class="top_nav">
+        <div class="container top_nav_container">
+            <div class="top_nav_warpper">
+                <p class="tap_nav_p">
+                    CHÀO MỪNG ĐẾN VỚI HỆ THỐNG CỬA HÀNG SGTECH
+                </p>
+                <a href="#" class="top_nav_link">MUA NGAY</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav_bar">
+        <a href="/Product/IndexUser" class="logo">SG<span>Tech</span></a>
+        <nav class="nav_list">
+            <div class="nav-links">
+                <a href="#">Trang chủ</a>
+                <a href="#">Về chúng tôi</a>
+                <a href="#">Liên hệ </a>
+                <a href="#">Tìm kiếm </a>
+            </div>
+
+            <div class="auth-buttons">
+                <a href="/Product/SearchCartPhone">
+                    <i class="fas fa-search"></i> Tra cứu đơn hàng
+                </a>
+                <a href="/Product/Cart" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i> Giỏ hàng
+                </a>
+                @if (Session["name"] == null)
+                {
+                    <div class="login-btn">
+                        <a href="/Account/Index">Đăng nhập</a>
+                    </div>
+                    <div class="signup-btn">
+                        <a href="/Account/SginUp">Đăng ký</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="notification-dropdown">
+                        <div class="notification-icon">
+                            <a href="/Product/profile">
+                                <i class="fas fa-user"></i> @Session["name"]
+                            </a>
+                            <span class="badge">1</span>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </nav>
+    </div>
+
+
+
+    <div class="navigation-dropdown">
+
+        <ul class="nav-home1">
+
+            <li>
+                <a href="" class="nav-home">Điện thoại</a>
+                <div class="home-dropdown-content1">
+                    <a href="" class="dropdown-1">Iphone</a>
+                    <a href="" class="dropdown-2">Samsung</a>
+            </li>
+
+
+            <li>
+                <a href="" class="nav-home">Laptop</a>
+                <div class="home-dropdown-content2">
+                    <a href="" class="dropdown-1">Acer</a>
+                    <a href="" class="dropdown-2">Dell</a>
+                </div>
+            </li>
+
+            <li>
+                <a href="" class="nav-home">Phụ kiện</a>
+            </li>
+            <li>
+                <a href="" class="nav-home">Đồng hồ</a>
+            </li>
+
+            <li>
+                <a href="" class="nav-home">PC</a>
+            </li>
+
+            <li>
+                <a href="" class="nav-home">Khuyến mãi</a>
+            </li>
+
+        </ul>
+
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-section">
+                <a href="~/Views/Shared/_Layout.cshtml" class="logo">SG<span>Tech</span></a>
+                <div class="footer-content">
+                    <h4>Tổng đài hỗ trợ miễn phí</h4>
+                    <p>Gọi mua hàng: 1900 2003</p>
+                    <p>Email: nguyenhotthanhphong5@gmail.com</p>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4 class="footer-title">Thông tin và chính sách</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Khách hàng và thanh toán Online</a></li>
+                    <li><a href="#">Mua hàng trả góp Online</a></li>
+                    <li><a href="#">Mua hàng trả góp bằng thẻ tín dụng</a></li>
+                    <li><a href="#">Chính sách giao hàng</a></li>
+                    <li><a href="#">Thông tin hóa đơn mua hàng</a></li>
+                    <li><a href="#">Trung tâm bảo hành chính hãng</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4 class="footer-title">Dịch vụ và thông tin khác</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Khách hàng doanh nghiệp</a></li>
+                    <li><a href="#">Ưu đãi thanh toán</a></li>
+                    <li><a href="#">Quy chế hoạt động</a></li>
+                    <li><a href="#">Chính sách bảo mật thông tin cá nhân</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Liên hệ hợp tác kinh doanh</a></li>
+                    <li><a href="#">Tuyển dụng</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section download-section">
+                <h4 class="footer-title">Tải xuống</h4>
+                <div class="qr-code">
+                    <img src="~/Content/Images/qr.jpg" alt="QR Code">
+                </div>
+                <div class="app-buttons">
+                    <a href="#" class="app-button">
+                        <img src="~/Content/Images/google-play.png" alt="Google Play">
+                        <div class="app-text">
+                            <small>Tải về trên</small>
+                            <span>Google Play</span>
+                        </div>
+                    </a>
+                    <a href="#" class="app-button">
+                        <img src="~/Content/Images/appstore.png" alt="App Store">
+                        <div class="app-text">
+                            <small>Tải về trên</small>
+                            <span>App Store</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="social-icons">
+                    <a href="#">
+                        <i class="fab fa-facebook-f"></i>
+                        <img src="~/Content/Images/facebook.png" alt="facebook">
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-instagram"></i>
+                        <img src="~/Content/Images/instagram.png" alt="instagram">
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-tiktok"></i>
+                        <img src="~/Content/Images/tik-tok.png" alt="tiktok">
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-youtube"></i>
+                        <img src="~/Content/Images/youtube.png" alt="youtube">
+                    </a>
+
+                    <a href="#">
+                        <i class="fab fa-/telegram"></i>
+                        <img src="~/Content/Images/telegram.png" alt="telegram">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    @@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    :root {
+        --font-main: "Inter", serif;
+        --colo-primary: #db4444;
+        --colo-dark-1: #000000;
+        --colo-dark-2: #7D8184;
+        --colo-white-1: #FFFFFF;
+        --colo-white-2: #f5f5f5;
+    }
+
+    * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+    }
+
+    html {
+        font-size: 10px;
+        /*1 rem = 10px*/
+    }
+
+    body {
+        font-family: var(--font-main);
+        font-size: 1.6rem;
+        overflow-x: hidden;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    /* top_nav */
+    .top_nav {
+        width: 100%;
+        height: 4rem;
+        background-color: var(--colo-dark-1);
+        top: 0;
+        left: 0;
+        z-index: 1001; /* Highest z-index */
+    }
+
+    .top_nav_container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .top_nav_warpper {
+        display: flex;
+        color: var(--colo-white-1);
+    }
+
+    .tap_nav_p {
+        font-size: 1.4rem;
+        font-weight: 400;
+    }
+
+    .top_nav_link {
+        margin-left: 1rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        text-decoration: none;
+        color: var(--colo-white-1);
+    }
+
+    .container {
+        max-width: 114rem;
+        margin: 0 auto;
+        padding: 0rem 1rem;
+    }
+
+    /*header*/
+    .nav_bar {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        left: 0;
+        padding: 15px 50px;
+        border-bottom: 1px solid #e6e6e6;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        background: #fff;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .logo {
+        font-size: 30px;
+        font-weight: bold;
+        color: var(--colo-dark-1);
+        text-decoration: none;
+        flex: 1;
+    }
+
+        .logo span {
+            background: #00b7bd;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+
+    .nav_list {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex: 2;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 50px;
+        font-weight: 700;
+        justify-content: center;
+        flex: 1;
+    }
+
+        .nav-links a {
+            color: var(--colo-dark-1);
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+    .auth-buttons {
+        display: flex;
+        gap: 10px;
+        flex: 1;
+        justify-content: flex-end;
+    }
+    /*.navigation-dropdown*/
+    /* Add margin to create space for fixed headers */
+    body {
+        /* top_nav + nav_bar heights */
+        padding-top: 0;
+    }
+
+    .navigation-dropdown {
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        /* Position this below the fixed headers */
+        width: 100%;
+        position: relative;
+    }
+
+        .navigation-dropdown ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            width: 100%;
+            max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+        }
+
+        .navigation-dropdown li {
+            position: relative;
+            flex: 1;
+            text-align: center;
+            margin: 0 10px; /* Thêm margin ngang để tạo khoảng cách giữa các mục */
+        }
+
+        .navigation-dropdown .nav-home {
+            display: inline-block;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--colo-dark-1);
+            text-decoration: none;
+            padding: 18px 0; /* Tăng padding dọc */
+            width: 100%;
+            transition: background-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        .navigation-dropdown a:hover {
+            background-color: #7D8184;
+            opacity: 0.9;
+        }
+
+    .home-dropdown-content1,
+    .home-dropdown-content2 {
+        display: none;
+        position: absolute;
+        background-color: #f5f5f5;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+        left: -10px; /* Điều chỉnh vị trí để bù lại margin của li */
+        flex-wrap: wrap;
+        padding: 15px; /* Thêm padding trong dropdown */
+    }
+
+    .home-dropdown-content1 {
+        width: 900px;
+    }
+
+    .home-dropdown-content2 {
+        width: 750px;
+    }
+
+        .home-dropdown-content1 a,
+        .home-dropdown-content2 a {
+            color: #000000;
+            padding: 15px 20px; /* Tăng padding */
+            display: block;
+            width: calc(20% - 20px); /* Điều chỉnh độ rộng để có khoảng cách rộng hơn */
+            box-sizing: border-box;
+            margin: 10px; /* Tăng margin để tạo khoảng cách rộng hơn */
+            text-align: center;
+            border-radius: 4px; /* Bo góc nhẹ */
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+            .home-dropdown-content1 a:hover,
+            .home-dropdown-content2 a:hover {
+                background-color: #7D8184;
+                opacity: 0.9;
+            }
+
+    .navigation-dropdown li:hover .home-dropdown-content1,
+    .navigation-dropdown li:hover .home-dropdown-content2 {
+        display: flex;
+    }
+
+    /*Slider*/
+    .slider-container {
+        width: 800px;
+        max-width: 100%;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        margin: 10px auto; /* Đảm bảo slider nằm giữa */
+    }
+
+    .slider {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        height: 400px;
+    }
+
+    .slide {
+        min-width: 100%;
+        position: relative;
+    }
+
+        .slide img {
+            width: 800px;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .slide-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        color: white;
+        padding: 20px;
+    }
+
+        .slide-content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .slide-content p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+
+
+        .slide-content button {
+            background-color: #00b7bd;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+            .slide-content button:hover {
+                background-color: #9cadaf;
+                opacity: 0.9;
+            }
+
+    .arrows {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+        transform: translateY(-50%);
+    }
+
+    .arrow {
+        background-color: rgba(255, 255, 255, 0.7);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+        .arrow:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+    .dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .dot.active {
+            background-color: white;
+        }
+
+
+    /*Search*/
+    .nav_items {
+        margin: 20px 0;
+        padding: 0;
+        box-sizing: border-box;
+        /* Add margin-top to account for fixed headers */
+        margin-top: 10px auto;
+    }
+
+    /* Form styling */
+    .nav_form {
+        position: relative;
+        display: flex;
+        align-items: center;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .nav_form-wrapper {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        border-radius: 30px;
+        box-shadow: 0 4px 12px rgba(149, 157, 165, 0.2);
+        transition: all 0.3s ease;
+    }
+
+        .nav_form-wrapper:hover,
+        .nav_form-wrapper:focus-within {
+            box-shadow: 0 6px 16px rgba(58, 134, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+    /* Input field styling */
+    .nav_input {
+        width: 100%;
+        padding: 16px 45px 16px 20px;
+        border: 2px solid #e0e0e0;
+        border-radius: 30px;
+        font-size: 16px;
+        color: #333;
+        background-color: #ffffff;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+        .nav_input:focus {
+            border-color: #000;
+        }
+
+        .nav_input::placeholder {
+            color: #8d99ae;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+    /* Search icon styling */
+    .nav_search {
+        position: absolute;
+        right: 20px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .nav_form-wrapper:hover .nav_search,
+    .nav_input:focus ~ .nav_search {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 2px rgba(58, 134, 255, 0.3));
+    }
+
+    /*footer*/
+
+    .footer {
+        background-color: #000000;
+        color: #ffffff;
+        padding: 30px 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .footer-section {
+        width: 25%;
+        margin-bottom: 20px;
+    }
+
+        .footer-section a {
+            color: #ffffff
+        }
+
+    .footer-title {
+        font-size: 18px;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+
+    .footer-content {
+        margin-top: 20px;
+    }
+
+        .footer-content h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .footer-content p {
+            font-size: 14px;
+            margin: 5px 0;
+            color: #cccccc;
+        }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #cccccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+            .footer-links a:hover {
+                color: #ffffff;
+            }
+
+    .download-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .qr-code {
+        width: 120px;
+        margin-bottom: 10px;
+    }
+
+        .qr-code img {
+            width: 100%;
+        }
+
+    .app-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .app-button {
+        display: flex;
+        align-items: center;
+        background-color: #222222;
+        border-radius: 5px;
+        padding: 8px 12px;
+        text-decoration: none;
+        color: #ffffff;
+    }
+
+        .app-button img {
+            width: 24px;
+            margin-right: 10px;
+        }
+
+    .app-text {
+        display: flex;
+        flex-direction: column;
+    }
+
+        .app-text small {
+            font-size: 10px;
+            color: #999999;
+        }
+
+        .app-text span {
+            font-size: 14px;
+        }
+
+    .social-icons {
+        display: flex;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+        .social-icons a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #333333;
+            color: #ffffff;
+            transition: background-color 0.3s;
+        }
+
+            .social-icons a:hover {
+                background-color: #00c2cb;
+            }
+
+    //
+    .auth-buttons {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    .auth-buttons a {
+        display: flex;
+        align-items: center;
+        color: var(--colo-dark-1);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+        .auth-buttons a:hover {
+            color: #00b7bd;
+        }
+
+        .auth-buttons a i {
+            margin-right: 6px;
+            font-size: 16px;
+        }
+
+    .cart-link {
+        position: relative;
+    }
+
+        .cart-link:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background-color: #00b7bd;
+            transition: width 0.3s ease;
+        }
+
+        .cart-link:hover:after {
+            width: 100%;
+        }
+
+    .login-btn, .signup-btn {
+        display: flex;
+        align-items: center;
+    }
+
+        .login-btn a {
+            padding: 8px 20px;
+            border: 1px solid #e6e6e6;
+            border-radius: 4rem;
+            background: var(--colo-white-1);
+            font-weight: 600;
+            color: var(--colo-dark-1);
+            transition: all 0.3s ease;
+        }
+
+            .login-btn a:hover {
+                background: #f5f5f5;
+                color: #00b7bd;
+                border-color: #00b7bd;
+            }
+
+        .signup-btn a {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4rem;
+            background: #00b7bd;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+            .signup-btn a:hover {
+                background: #008a8f;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 183, 189, 0.2);
+            }
+
+    /* Notification Dropdown Styling */
+    .notification-dropdown {
+        position: relative;
+    }
+
+    .notification-icon {
+        display: flex;
+        align-items: center;
+        padding: 8px 16px;
+        border-radius: 4rem;
+        background: #00b7bd;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .notification-icon:hover {
+            background: #008a8f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 183, 189, 0.2);
+        }
+
+        .notification-icon a {
+            color: white !important;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+            .notification-icon a i {
+                margin-right: 8px;
+                font-size: 16px;
+            }
+
+    .badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--colo-primary);
+        color: white;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        font-weight: bold;
+        box-shadow: 0 2px 4px rgba(219, 68, 68, 0.3);
+    }
+
+    /* Media queries for responsiveness */
+    @@media (max-width: 768px) {
+        .auth-buttons {
+            gap: 10px;
+        }
+
+        .login-btn a, .signup-btn a, .notification-icon {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        .auth-buttons a i {
+            font-size: 14px;
+        }
+    }
+</style>
+
+
+
+<script>
+
+    const slider = document.querySelector('.slider');
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const dots = document.querySelectorAll('.dot');
+
+    let currentIndex = 0;
+    const slideWidth = 100; // percentage
+
+    function updateSlider() {
+        slider.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateSlider();
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateSlider();
+    }
+
+    // Event listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            currentIndex = parseInt(dot.getAttribute('data-index'));
+            updateSlider();
+        });
+    });
+
+    // Auto-slide functionality
+    let slideInterval = setInterval(nextSlide, 5000);
+
+    // Pause auto-slide on hover
+    slider.addEventListener('mouseenter', () => {
+        clearInterval(slideInterval);
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        slideInterval = setInterval(nextSlide, 5000);
+    });
+
+    // Touch events for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider.addEventListener('touchstart', e => {
+
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    slider.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        if (touchStartX - touchEndX > 50) {
+            nextSlide();
+        } else if (touchEndX - touchStartX > 50) {
+            prevSlide();
+        }
+    }
+</script>

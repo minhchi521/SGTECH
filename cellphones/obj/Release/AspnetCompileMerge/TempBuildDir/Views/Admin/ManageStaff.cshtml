@@ -1,0 +1,75 @@
+﻿@model IEnumerable<cellphones.Models.User>
+
+@{
+    ViewBag.Title = "ManageStaff";
+    @Styles.Render("~/Content/main.css");
+}
+<div class="search-container">
+    <div class="search-form-container" style="display: flex; flex-direction: row;margin:auto">
+        @using (Html.BeginForm("Search", "Admin", FormMethod.Get, new { @class = "search-form" }))
+        {
+            <input type="text" placeholder="Tìm kiếm theo tên sản phẩm" name="searchString">
+            <button type="submit">
+                <i class="fa fa-search"></i>
+                Tìm kiếm
+            </button>}
+        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "create-link" })
+    </div>
+
+</div>
+<h2>ManageStaff</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+            </td>
+        </tr>
+    }
+
+</table>

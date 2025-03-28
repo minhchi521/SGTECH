@@ -1,0 +1,85 @@
+﻿@model IEnumerable<cellphones.Models.Category>
+
+@{
+    ViewBag.Title = "Categoty";
+    @Styles.Render("~/Content/main.css");
+}
+<div class="search-container">
+    <div class="search-form-container" style="display: flex; flex-direction: row;margin:auto">
+        @using (Html.BeginForm("SearchCategory", "Admin", FormMethod.Get, new { @class = "search-form" }))
+        {
+            <input type="text" placeholder="Tìm kiếm theo tên sản phẩm" name="searchString">
+            <button type="submit">
+                <i class="fa fa-search"></i>
+                Tìm kiếm
+            </button>}
+        @Html.ActionLink("Thêm mới", "CreateCategoty", null, new { @class = "create-link" })
+    </div>
+
+</div>
+<h2>Categoty</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditCategoty", new { id = item.CategoryID }, new { @class = "action-button edit-button" })
+                @Html.ActionLink("Delete", "DeleteCategoty", new { id = item.CategoryID }, new { @class = "action-button delete-button" })
+            </td>
+        </tr>
+    }
+
+</table>
+<style>
+    .action-button {
+        padding: 5px 10px;
+        margin: 0 3px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        display: inline-block;
+        border: 1px solid;
+    }
+
+    /* Nút Edit */
+    .edit-button {
+        color: #2196F3;
+        border-color: #2196F3;
+        background-color: transparent;
+    }
+
+        .edit-button:hover {
+            background-color: #2196F3;
+            color: white;
+        }
+
+    /* Nút Delete */
+    .delete-button {
+        color: #F44336;
+        border-color: #F44336;
+        background-color: transparent;
+    }
+
+        .delete-button:hover {
+            background-color: #F44336;
+            color: white;
+        }
+
+</style>

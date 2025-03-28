@@ -1,0 +1,35 @@
+﻿@model List<cellphones.Models.User>
+
+<h2>Danh sách người dùng</h2>
+
+<div class="user-list">
+    @foreach (var user in Model)
+    {
+        <div class="user-item">
+            <a href="@Url.Action("MessagesAdmin", new { receiverId = user.UserID })">
+                @user.Username
+            </a>
+        </div>
+    }
+</div>
+
+<style>
+    .user-list {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .user-item {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+        .user-item a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .user-item:hover {
+            background-color: #f4f4f4;
+        }
+</style>

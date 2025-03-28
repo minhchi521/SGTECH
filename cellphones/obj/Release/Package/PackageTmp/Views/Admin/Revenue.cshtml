@@ -1,0 +1,308 @@
+﻿@model IEnumerable<cellphones.Models.sale>
+
+<style>
+    .filters-section {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
+
+    .filters-form {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    select {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        min-width: 120px;
+    }
+
+    input[type="date"] {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .button-primary {
+        background: #4a90e2;
+        color: white;
+    }
+
+        .button-primary:hover {
+            background: #357abd;
+        }
+
+    .chart-links {
+        display: flex;
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .chart-link {
+        padding: 10px 20px;
+        background: #f8f9fa;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #4a90e2;
+        transition: all 0.3s ease;
+    }
+
+        .chart-link:hover {
+            background: #e9ecef;
+        }
+
+    .export-section {
+        margin: 20px 0;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background: white;
+    }
+
+        .table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .table tr:hover {
+            background: #f8f9fa;
+        }
+
+    .status-pending {
+        color: #f39c12;
+        font-weight: 500;
+    }
+
+    .status-success {
+        color: #2ecc71;
+        font-weight: 500;
+    }
+
+    .amount {
+        font-family: monospace;
+        font-weight: 500;
+    }
+</style>
+
+<div class="stats-container">
+    <div class="filters-section">
+        @using (Html.BeginForm("Revenue", "Admin", FormMethod.Get, new { @class = "filters-form" }))
+        {
+            <div class="filter-group">
+                <select id="month" name="month">
+                    <option value="0" @(ViewBag.Month == 0 ? "selected" : "")>Chọn tháng</option>
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        <option value="@i" @(ViewBag.Month == i ? "selected" : "")>@i</option>
+                    }
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <select id="year" name="year">
+                    <option value="0" @(ViewBag.Year == 0 ? "selected" : "")>Chọn năm</option>
+                    @for (int i = 2020; i <= DateTime.Now.Year; i++)
+                    {
+                        <option value="@i" @(ViewBag.Year == i ? "selected" : "")>@i</option>
+                    }
+                </select>
+            </div>
+
+            <div class="filter-group">
+
+                <input type="date" id="fromDate" name="fromDate" value="@(ViewBag.FromDate != null ? ((DateTime)ViewBag.FromDate).ToString("yyyy-MM-dd") : "")" />
+            </div>
+
+            <div class="filter-group">
+                <input type="date" id="toDate" name="toDate" value="@(ViewBag.ToDate != null ? ((DateTime)ViewBag.ToDate).ToString("yyyy-MM-dd") : "")" />
+            </div>
+
+            <input type="submit" value="Lọc" class="button button-primary" />
+        }
+    </div>
+
+    <div class="chart-links">
+        <a href="@Url.Action("ColumnChart","Admin")" class="chart-link">
+            <i class="fas fa-chart-bar"></i> Biểu đồ cột
+        </a>
+        <a href="@Url.Action("doanhthutron", "Admin")" class="chart-link">
+            <i class="fas fa-chart-pie"></i> Biểu đồ tròn
+        </a>
+    </div>
+
+    <div class="export-section">
+        @using (Html.BeginForm("Excel", "Admin", FormMethod.Get))
+        {
+            <input type="hidden" name="month" value="@ViewBag.Month" />
+            <input type="hidden" name="year" value="@ViewBag.Year" />
+            <input type="hidden" name="fromDate" value="@(ViewBag.FromDate != null ? ((DateTime)ViewBag.FromDate).ToString("yyyy-MM-dd") : "")" />
+            <input type="hidden" name="toDate" value="@(ViewBag.ToDate != null ? ((DateTime)ViewBag.ToDate).ToString("yyyy-MM-dd") : "")" />
+            <input type="submit" value="Xuất Excel" class="button button-primary" />
+        }
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.salesID)</th>
+            <th>@Html.DisplayNameFor(model => model.timespent)</th>
+            <th>@Html.DisplayNameFor(model => model.spenttotal)</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.salesID)</td>
+                <td>@(item.timespent.HasValue ? item.timespent.Value.ToString("dd/MM/yyyy") : "")</td>
+                <td class="amount">@Html.DisplayFor(modelItem => item.spenttotal)</td>
+                <td>
+                    @Html.ActionLink("Details", "DetailsSales", new { id = item.OrderID }, new { @class = "action-button details-button" })
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>
+<div>
+    <!-- Thống kê tổng quan -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card stats-card mb-3">
+                <div class="card-body position-relative">
+                    <i class="fas fa-money-bill-wave stats-icon"></i>
+                    <h5 class="card-title mb-3">Tổng Doanh Thu</h5>
+                    <p class="card-text">@ViewBag.TongTien.ToString("N0") VNĐ</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card stats-card mb-3">
+                <div class="card-body position-relative">
+                    <i class="fas fa-exchange-alt stats-icon"></i>
+                    <h5 class="card-title mb-3">Số Giao Dịch</h5>
+                    <p class="card-text">@ViewBag.SoGiaoDich</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card stats-card mb-3">
+                <div class="card-body position-relative">
+                    <i class="fas fa-chart-line stats-icon"></i>
+                    <h5 class="card-title mb-3">Trung Bình/Giao Dịch</h5>
+                    <p class="card-text">@ViewBag.TrungBinhGiaoDich.ToString("N0") VNĐ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .action-button {
+        padding: 5px 10px;
+        margin: 0 3px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        display: inline-block;
+        border: 1px solid;
+    }
+
+    /* Nút Details */
+    .details-button {
+        color: #4CAF50;
+        border-color: #4CAF50;
+        background-color: transparent;
+    }
+
+        .details-button:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+</style>
+<style>
+    .stats-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+    .card-title {
+        color: #495057;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .card-text {
+        color: #2c3e50;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .stats-icon {
+        font-size: 2rem;
+        opacity: 0.1;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+
+    .status-badge {
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .status-pending {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    .status-success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .amount-col {
+        font-family: 'Roboto Mono', monospace;
+        font-weight: 500;
+    }
+</style>

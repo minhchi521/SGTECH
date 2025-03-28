@@ -1,0 +1,329 @@
+﻿@model IEnumerable<cellphones.Models.Order>
+@{
+    ViewBag.Title = "BuyPremium";
+    Layout = "~/Views/Shared/_LayoutUser2.cshtml";
+
+    // Take only the most recent pending order to display in the form
+    var orderToProcess = Model.Where(o => o.PaymentStatus == "Pending").OrderByDescending(o => o.OrderDate).FirstOrDefault();
+}
+
+<div class="cart-container">
+    <div class="row">
+        <!-- Payment Section -->
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Payment Information</h4>
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.ErrorMessage
+                    </div>
+                }
+
+                @if (orderToProcess != null)
+                {
+                    <!-- Display payment form only if there's a pending order -->
+                    using (Html.BeginForm("ProcessBuyPremium", "Product", FormMethod.Post, new { id = "payment-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <!-- Order Summary -->
+                            <div class="col-md-5">
+                                <div class="card mb-4">
+                                    <div class="card-header bg-light">
+                                        <h5 class="mb-0">Order Summary</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Subscription Plan:</span>
+                                            <span class="original-price">@orderToProcess.TotalAmount.ToString("N0") VND</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Tax:</span>
+                                            <span>Free</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-2 discount-row" style="display: none;">
+                                            <span>Discount:</span>
+                                            <span id="discount-amount">-0 VND</span>
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between font-weight-bold">
+                                            <span>Total:</span>
+                                            <span id="total-amount">@orderToProcess.TotalAmount.ToString("N0") VND</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Add hidden input for order ID -->
+                                <input type="hidden" id="order-id" name="orderId" value="@orderToProcess.OrderID">
+                            </div>
+
+                            <!-- Payment Options -->
+                            <div class="col-md-7">
+                                <!-- Payment Methods -->
+                                <div class="form-group mb-4">
+                                    <label class="font-weight-bold">Payment Method</label>
+                                    <div class="row payment-methods mt-2">
+                                        <div class="col-3 mb-3">
+                                            <div class="payment-method selected" data-method="momo">
+                                                <div class="card h-100 text-center py-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-wallet mb-2" style="font-size: 24px;"></i>
+                                                        <p class="mb-0">MoMo</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-3 mb-3">
+                                            <div class="payment-method" data-method="visa">
+                                                <div class="card h-100 text-center py-2">
+                                                    <div class="card-body">
+                                                        <i class="fab fa-cc-visa mb-2" style="font-size: 24px;"></i>
+                                                        <p class="mb-0">Visa</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-3 mb-3">
+                                            <div class="payment-method" data-method="PAY">
+                                                <div class="card h-100 text-center py-2">
+                                                    <div class="card-body">
+                                                        <i class="fas fa-university mb-2" style="font-size: 24px;"></i>
+                                                        <p class="mb-0">PAY</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="paymentMethod" id="selected-payment-method" value="momo">
+                                </div>
+
+                                <!-- Promo Code -->
+                                <div class="form-group mb-4">
+                                    <label class="font-weight-bold">Promotion Code</label>
+                                    <div class="input-group mt-2">
+                                        <input type="text" id="promo-code" class="form-control" placeholder="Enter promotion code">
+                                        <div class="input-group-append">
+                                            <button type="button" id="apply-promo" class="checkout-btn">Apply</button>
+                                        </div>
+                                    </div>
+                                    <div id="promo-message" class="mt-2" style="display: none;"></div>
+                                    <input type="hidden" name="promoCode" id="applied-promo-code" value="">
+                                    <input type="hidden" name="discountAmount" id="discount-value" value="0">
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="form-group text-center mt-4">
+                                    <button type="submit" class="checkout-btn">Purchase Premium</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <!-- Display message if there are no pending orders -->
+                    <div class="alert alert-info">
+                        <h5>No pending orders found</h5>
+                        <p>All your orders have been processed or there are no orders in the system.</p>
+                        <a href="@Url.Action("IndexUser", "Product")" class="btn btn-primary mt-3">Continue Shopping</a>
+                    </div>
+                }
+
+                <!-- Order History Section -->
+                @if (Model.Any())
+                {
+                    <div class="mt-4">
+                        <h5>Order History</h5>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Order #</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Payment Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var order in Model.OrderByDescending(o => o.OrderDate))
+                                    {
+                                        <tr>
+                                            <td>@order.number</td>
+                                            <td>@order.OrderDate.Value.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>@order.TotalAmount.ToString("N0") VND</td>
+                                            <td>@order.Status</td>
+                                            <td>@order.PaymentStatus</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Font Awesome for icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<style>
+    .cart-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .payment-method .card {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        height: 100%;
+        border: 2px solid #dee2e6;
+    }
+
+    .payment-method.selected .card {
+        border-color: #007bff;
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    .payment-method .card:hover {
+        border-color: #007bff;
+    }
+
+    #promo-message.error {
+        color: #dc3545;
+        display: block;
+    }
+
+    #promo-message.success {
+        color: #28a745;
+        display: block;
+    }
+
+    .checkout-btn {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .checkout-btn {
+        background: #d70018;
+        color: white;
+    }
+
+        .checkout-btn:hover {
+            background: #c40016;
+        }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Format currency function
+        function formatCurrency(amount) {
+            return parseFloat(amount).toLocaleString('vi-VN') + ' VND';
+        }
+
+        // Payment method selection
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', function () {
+                // Remove selected class from all methods
+                paymentMethods.forEach(m => m.classList.remove('selected'));
+
+                // Add selected class to clicked method
+                this.classList.add('selected');
+
+                // Update hidden input
+                document.getElementById('selected-payment-method').value = this.dataset.method;
+            });
+        });
+
+        // Promo code verification
+        const applyPromoButton = document.getElementById('apply-promo');
+        if (applyPromoButton) {
+            applyPromoButton.addEventListener('click', function () {
+                const promoCode = document.getElementById('promo-code').value.trim();
+                const promoMessage = document.getElementById('promo-message');
+                const orderId = document.getElementById('order-id').value;
+
+                if (promoCode === '') {
+                    promoMessage.textContent = 'Vui lòng nhập mã giảm giá';
+                    promoMessage.className = 'error';
+                    promoMessage.style.display = 'block';
+                    return;
+                }
+
+                // Create a form for AJAX submission
+                const formData = new FormData();
+                formData.append('codeDiscount', promoCode);
+                formData.append('orderId', orderId);
+
+                // Add antiforgery token
+                const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+                formData.append('__RequestVerificationToken', token);
+
+                // Make AJAX request
+                fetch('/Product/ApplyDiscount', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Show success message
+                            promoMessage.textContent = `Giảm giá ${data.discountPercent}% đã được áp dụng`;
+                            promoMessage.className = 'success';
+                            promoMessage.style.display = 'block';
+
+                            // Update discount display
+                            const discountElement = document.querySelector('.discount-row');
+                            const discountAmountElement = document.getElementById('discount-amount');
+                            const totalElement = document.getElementById('total-amount');
+
+                            // Show discount row
+                            discountElement.style.display = 'flex';
+                            discountAmountElement.textContent = '-' + formatCurrency(data.discountAmount);
+
+                            // Update total
+                            totalElement.textContent = formatCurrency(data.newTotal);
+
+                            // Update hidden fields for form submission
+                            document.getElementById('applied-promo-code').value = promoCode;
+                            document.getElementById('discount-value').value = data.discountAmount;
+                        } else {
+                            // Show error message
+                            promoMessage.textContent = data.message;
+                            promoMessage.className = 'error';
+                            promoMessage.style.display = 'block';
+
+                            // Hide discount row
+                            document.querySelector('.discount-row').style.display = 'none';
+
+                            // Reset hidden fields
+                            document.getElementById('applied-promo-code').value = '';
+                            document.getElementById('discount-value').value = '0';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        promoMessage.textContent = 'Đã xảy ra lỗi, vui lòng thử lại';
+                        promoMessage.className = 'error';
+                        promoMessage.style.display = 'block';
+                    });
+            });
+        }
+    });
+</script>

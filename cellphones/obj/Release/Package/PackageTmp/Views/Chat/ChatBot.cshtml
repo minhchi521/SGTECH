@@ -1,0 +1,198 @@
+﻿@model IEnumerable<cellphones.Models.Message>
+@{
+    ViewBag.Title = "Trò chuyện với SGTech Assistant";
+    Layout = "~/Views/Shared/_LayoutUser2.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>@ViewBag.Title</h2>
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-robot me-2"></i>
+                        <span>SGTech Assistant</span>
+                    </div>
+                </div>
+
+                <div class="card-body chat-box" id="chatBox" style="height: 400px; overflow-y: auto;">
+                    @if (Model.Count() == 0)
+                    {
+                        <div class="text-center py-5">
+                            <p>Chào mừng bạn đến với SGTech Assistant!</p>
+                            <p>Hỏi tôi bất cứ điều gì về sản phẩm, dịch vụ hoặc khuyến mãi.</p>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var message in Model)
+                        {
+                            if (message.SenderID == ViewBag.ReceiverId)
+                            {
+                                <div class="d-flex mb-3">
+                                    <div class="bot-avatar me-2">
+                                        <i class="fa fa-robot bg-primary text-white p-2 rounded-circle"></i>
+                                    </div>
+                                    <div class="message-bubble bot p-3 bg-light rounded-3">
+                                        @message.Content
+                                        <div class="text-muted small">@message.Timestamp.Value.ToString("HH:mm")</div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="d-flex justify-content-end mb-3">
+                                    <div class="message-bubble user p-3 bg-primary text-white rounded-3">
+                                        @message.Content
+                                        <div class="text-white-50 small">@message.Timestamp.Value.ToString("HH:mm")</div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+
+                <div class="card-footer">
+                    @using (Html.BeginForm("SendChatBotMessage", "Chat", FormMethod.Post, new { id = "chatForm", @class = "d-flex" }))
+                    {
+                        <input type="text" name="content" id="messageInput" class="form-control" placeholder="Nhập tin nhắn..." required />
+                        <button type="submit" class="btn btn-primary ms-2">
+                            <i class="fa fa-paper-plane"></i> Gửi
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            // Scroll to bottom of chat box
+            var chatBox = document.getElementById('chatBox');
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Optional: Add AJAX form submission for smoother experience
+            $("#chatForm").submit(function(e) {
+                e.preventDefault();
+
+                var messageContent = $("#messageInput").val();
+                if (!messageContent.trim()) return;
+
+                // Add user message to chat immediately
+                var userTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                var userHtml = `
+                    <div class="d-flex justify-content-end mb-3">
+                        <div class="message-bubble user p-3 bg-primary text-white rounded-3">
+                            ${messageContent}
+                            <div class="text-white-50 small">${userTime}</div>
+                        </div>
+                    </div>
+                `;
+                $("#chatBox").append(userHtml);
+
+                // Clear input
+                $("#messageInput").val('');
+
+                // Scroll to bottom
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Show typing indicator
+                var typingHtml = `
+                    <div class="d-flex mb-3" id="typingIndicator">
+                        <div class="bot-avatar me-2">
+                            <i class="fa fa-robot bg-primary text-white p-2 rounded-circle"></i>
+                        </div>
+                        <div class="message-bubble bot p-2 bg-light rounded-3">
+                            <div class="typing-dots">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $("#chatBox").append(typingHtml);
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Send AJAX request
+                $.ajax({
+                    url: '@Url.Action("SendChatBotMessage", "Chat")',
+                    type: 'POST',
+                    data: { content: messageContent },
+                    success: function(response) {
+                        // Remove typing indicator
+                        $("#typingIndicator").remove();
+
+                        // Add bot response
+                        var botTime = new Date(response.botResponse.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        var botHtml = `
+                            <div class="d-flex mb-3">
+                                <div class="bot-avatar me-2">
+                                    <i class="fa fa-robot bg-primary text-white p-2 rounded-circle"></i>
+                                </div>
+                                <div class="message-bubble bot p-3 bg-light rounded-3">
+                                    ${response.botResponse.content}
+                                    <div class="text-muted small">${botTime}</div>
+                                </div>
+                            </div>
+                        `;
+                        $("#chatBox").append(botHtml);
+
+                        // Scroll to bottom
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    },
+                    error: function() {
+                        // Remove typing indicator
+                        $("#typingIndicator").remove();
+
+                        // Show error message
+                        var errorHtml = `
+                            <div class="d-flex mb-3">
+                                <div class="bot-avatar me-2">
+                                    <i class="fa fa-robot bg-primary text-white p-2 rounded-circle"></i>
+                                </div>
+                                <div class="message-bubble bot p-3 bg-danger text-white rounded-3">
+                                    Có lỗi xảy ra. Vui lòng thử lại sau.
+                                </div>
+                            </div>
+                        `;
+                        $("#chatBox").append(errorHtml);
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    }
+                });
+            });
+        });
+    </script>
+
+    <style>
+        .typing-dots {
+            display: flex;
+            padding: 6px 10px;
+        }
+
+        .typing-dots .dot {
+            width: 8px;
+            height: 8px;
+            margin: 0 4px;
+            background-color: #aaa;
+            border-radius: 50%;
+            animation: typing-dot 1.5s infinite ease-in-out;
+        }
+
+        .typing-dots .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @@keyframes typing-dot {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+    </style>
+}

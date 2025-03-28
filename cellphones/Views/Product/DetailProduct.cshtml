@@ -1,0 +1,668 @@
+﻿@model cellphones.Models.ProductWithComment
+@{
+    ViewBag.Title = "DetailProduct";
+    Layout = "~/Views/Shared/_LayoutUser2.cshtml";
+}
+
+<div class="product-detail-container">
+    <div class="product-header">
+        <h1 class="product-title">@Model.product.ProductName</h1>
+        @if (Model.product.StockQuantity <= 0)
+        {
+            <span class="stock-status out-of-stock">Hết hàng</span>
+        }
+        else
+        {
+            <span class="stock-status in-stock">Còn hàng</span>
+        }
+        <div class="rating-container">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <span class="review-count">7 đánh giá</span>
+        </div>
+    </div>
+
+    <div class="product-content">
+        <div class="product-image-section">
+            <img src="@Url.Content(Model.product.Image)" alt="@Model.product.ProductName" class="product-image">
+            <h3>TÍNH NĂNG NỔI BẬT</h3>
+            <ul class="features-list">
+                @foreach (var line in Model.product.Description.Split('\n'))
+                {
+                    <li>@line</li>
+                }
+            </ul>
+        </div>
+
+        <div class="product-options">
+            <div class="storage-options">
+                <div class="storage-option active">
+                    <div class="storage-size">256GB</div>
+                    <div class="storage-price">@Model.product.Price.ToString("N0")đ</div>
+                </div>
+                <div class="storage-option">
+                    <div class="storage-size">512GB</div>
+                    <div class="storage-price">@((decimal)(Model.product.Price * 1.2m))đ</div>
+                </div>
+                <div class="storage-option">
+                    <div class="storage-size">1TB</div>
+                    <div class="storage-price">@((decimal)(Model.product.Price * 1.5m))đ</div>
+                </div>
+            </div>
+
+            <div class="color-options">
+                <div class="color-option active">
+                    <span>Titan đen</span>
+                    <span class="price">@Model.product.Price.ToString("N0")đ</span>
+                </div>
+                <div class="color-option">
+                    <span>Titan trắng</span>
+                    <span class="price">@Model.product.Price.ToString("N0")đ</span>
+                </div>
+            </div>
+            @if (Session["id"] == null)
+            {
+                <div class="action-buttons">
+                    @Html.ActionLink("BuyNoLogin", "BuyNoLogin", new { id = Model.product.ProductID }, new { @class = "btn btn-primary" })
+                </div>
+            }
+            <div class="action-buttons">
+                @if (Model.product.StockQuantity > 0)
+                {
+                    @Html.ActionLink("MUA NGAY", "buyproduct", new { id = Model.product.ProductID }, new { @class = "btn btn-primary" })
+                }
+                else
+                {
+                    <a href="#" class="btn btn-primary show-out-of-stock-modal">MUA NGAY</a>
+                }
+                <a href="#" class="btn btn-secondary">TRẢ GÓP 0%</a>
+                <a href="#" class="btn btn-secondary">TRẢ GÓP QUA THẺ</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="similar-products">
+        <h2 class="section-title">SẢN PHẨM TƯƠNG TỰ</h2>
+        <div class="products-grid">
+            <!-- Similar products would go here -->
+        </div>
+        <div class="section-card">
+            <h2 class="section-title">Bình luận và Đánh giá</h2>
+            @if (Model.HasPurchased)
+            {
+                using (Html.BeginForm("AddComment", "Product", new { id = Model.product.ProductID }, FormMethod.Post, new { id = "commentForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.LabelFor(model => model.NewComment, new { @class = "info-label" })
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.NewComment, new { @class = "form-control", rows = "3", cols = "50", id = "commentText" })
+                        @Html.ValidationMessageFor(model => model.NewComment, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Rating, new { @class = "info-label" })
+                        <div class="rating-group">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <label class="radio-inline">
+                                    @Html.RadioButtonFor(model => model.Rating, i, new { @class = "ratingRadio" }) @i
+                                </label>
+                            }
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                    </div>
+                    <button type="submit" id="submitButton" class="btn btn-danger" style="display: none;">Gửi đánh giá</button>
+                }
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <p>Chỉ khách hàng đã mua sản phẩm này mới có thể bình luận và đánh giá.</p>
+                </div>
+            }
+
+            <div class="comment-list">
+                <h3 class="section-title" style="margin-top: 20px;">Đánh giá hiện có</h3>
+                @if (Model.DanhGia != null && Model.DanhGia.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var comment in Model.DanhGia)
+                        {
+                            <li class="list-group-item">
+                                <strong>@comment.User</strong>
+                                <p>@comment.Comment</p>
+                                <div class="comment-meta">
+                                    @if (comment.Rating.HasValue)
+                                    {
+                                        <span>Đánh giá: @comment.Rating / 5</span>
+                                    }
+                                    @if (comment.ReviewDate.HasValue)
+                                    {
+                                        <span class="text-muted"> - @comment.ReviewDate.Value.ToString("dd/MM/yyyy HH:mm")</span>
+                                    }
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>Chưa có đánh giá nào.</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Out of Stock Modal -->
+    <div id="outOfStockModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-header">
+                <h2>Thông báo</h2>
+            </div>
+            <div class="modal-body">
+                <p>Sản phẩm hiện đang hết hàng.</p>
+                <p>Vui lòng chọn sản phẩm khác hoặc quay lại sau.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary close-modal-btn">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Main container */
+    .product-detail-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Product header */
+    .product-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .product-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+    }
+
+    .rating-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .stars {
+        color: #ffd700;
+        font-size: 1.1rem;
+    }
+
+    .review-count {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    /* Stock status indicator */
+    .stock-status {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-left: 10px;
+    }
+
+    .in-stock {
+        background-color: #c6f6d5;
+        color: #22543d;
+    }
+
+    .out-of-stock {
+        background-color: #fed7d7;
+        color: #822727;
+    }
+
+    /* Product content grid */
+    .product-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    /* Product image section */
+    .product-image-section {
+        background: #ffe4e4;
+        border-radius: 12px;
+        padding: 20px;
+    }
+
+    .product-image {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .features-list {
+        margin-top: 20px;
+        padding: 0;
+        list-style: none;
+    }
+
+        .features-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+            .features-list li::before {
+                content: "•";
+                position: absolute;
+                left: 0;
+                color: #e53e3e;
+            }
+
+    /* Product options section */
+    .product-options {
+        padding: 20px;
+    }
+
+    /* Storage options */
+    .storage-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .storage-option {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+        .storage-option:hover {
+            border-color: #e53e3e;
+        }
+
+        .storage-option.active {
+            border-color: #e53e3e;
+            background-color: #fff5f5;
+        }
+
+    .storage-size {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .storage-price {
+        color: #e53e3e;
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
+
+    /* Color options */
+    .color-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .color-option {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+        .color-option:hover {
+            border-color: #e53e3e;
+        }
+
+        .color-option.active {
+            border-color: #e53e3e;
+            background-color: #fff5f5;
+        }
+
+    /* Action buttons */
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .btn {
+        padding: 15px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        text-decoration: none;
+    }
+
+    .btn-primary {
+        background-color: #e53e3e;
+        color: white;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #c53030;
+        }
+
+    .btn-secondary {
+        background-color: #4299e1;
+        color: white;
+        border: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #3182ce;
+        }
+
+    .btn-info {
+        background-color: #38b2ac;
+        color: white;
+        border: none;
+    }
+
+        .btn-info:hover {
+            background-color: #319795;
+        }
+
+    .mb-2 {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Similar products section */
+    .similar-products {
+        margin-top: 40px;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .product-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        position: relative;
+    }
+
+    .discount-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: #e53e3e;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+    }
+
+    /* Modal styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background-color: white;
+        border-radius: 8px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        animation: modalFadeIn 0.3s;
+        position: relative;
+    }
+
+    @@keyframes modalFadeIn {
+        from {opacity: 0; transform: translateY(-20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    .modal-header {
+        padding: 15px 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .modal-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: #e53e3e;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-footer {
+        padding: 15px 20px;
+        text-align: right;
+        border-top: 1px solid #eee;
+    }
+
+    .close-button {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+    }
+
+    .close-button:hover {
+        color: #e53e3e;
+    }
+
+    /* Responsive design */
+    @@media (max-width: 768px) {
+        .product-content {
+            grid-template-columns: 1fr;
+        }
+
+        .storage-options,
+        .color-options {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        // Vanilla JavaScript approach - no jQuery dependency
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM fully loaded');
+
+            // Get DOM elements
+            var commentText = document.getElementById('commentText');
+            var submitButton = document.getElementById('submitButton');
+            var ratingRadios = document.getElementsByClassName('ratingRadio');
+            var outOfStockModal = document.getElementById('outOfStockModal');
+            var showModalButtons = document.getElementsByClassName('show-out-of-stock-modal');
+            var closeButtons = document.getElementsByClassName('close-button');
+            var closeModalButtons = document.getElementsByClassName('close-modal-btn');
+
+            console.log('Elements found:', {
+                commentText: commentText !== null,
+                submitButton: submitButton !== null,
+                ratingRadios: ratingRadios.length
+            });
+
+            // Function to check form validity
+            function checkFormValidity() {
+                // Check if comment has text
+                var hasComment = commentText && commentText.value.trim().length > 0;
+
+                // Check if any rating is selected
+                var hasRating = false;
+                for (var i = 0; i < ratingRadios.length; i++) {
+                    if (ratingRadios[i].checked) {
+                        hasRating = true;
+                        break;
+                    }
+                }
+
+                console.log('Form status:', {
+                    hasComment: hasComment,
+                    hasRating: hasRating
+                });
+
+                // Show or hide button based on validation
+                if (submitButton) {
+                    if (hasComment && hasRating) {
+                        submitButton.style.display = 'block';
+                        console.log('Submit button made visible');
+                    } else {
+                        submitButton.style.display = 'none';
+                        console.log('Submit button hidden');
+                    }
+                }
+            }
+
+            // Add event listeners
+            if (commentText) {
+                commentText.addEventListener('input', function () {
+                    console.log('Comment changed:', this.value);
+                    checkFormValidity();
+                });
+            }
+
+            // Add listeners to all radio buttons
+            for (var i = 0; i < ratingRadios.length; i++) {
+                ratingRadios[i].addEventListener('change', function () {
+                    console.log('Rating selected:', this.value);
+                    checkFormValidity();
+                });
+            }
+
+            // Initial check
+            checkFormValidity();
+
+            // Out of stock modal functionality
+            // Show modal when clicking on "MUA NGAY" for out-of-stock products
+            for (var i = 0; i < showModalButtons.length; i++) {
+                showModalButtons[i].addEventListener('click', function (event) {
+                    event.preventDefault();
+                    outOfStockModal.style.display = 'flex';
+                });
+            }
+
+            // Close modal when clicking on X button
+            for (var i = 0; i < closeButtons.length; i++) {
+                closeButtons[i].addEventListener('click', function () {
+                    outOfStockModal.style.display = 'none';
+                });
+            }
+
+            // Close modal when clicking on "Đóng" button
+            for (var i = 0; i < closeModalButtons.length; i++) {
+                closeModalButtons[i].addEventListener('click', function () {
+                    outOfStockModal.style.display = 'none';
+                });
+            }
+
+            // Close modal when clicking outside of it
+            window.addEventListener('click', function (event) {
+                if (event.target == outOfStockModal) {
+                    outOfStockModal.style.display = 'none';
+                }
+            });
+
+            // Backup jQuery version in case there's an issue with vanilla JS
+            if (typeof $ !== 'undefined') {
+                console.log('jQuery is available, version:', $.fn.jquery);
+
+                $(function () {
+                    $('#commentText').on('input', function () {
+                        var hasText = $(this).val().trim().length > 0;
+                        var hasRating = $('.ratingRadio:checked').length > 0;
+
+                        console.log('jQuery check:', {
+                            hasText: hasText,
+                            hasRating: hasRating
+                        });
+
+                        if (hasText && hasRating) {
+                            $('#submitButton').show();
+                        } else {
+                            $('#submitButton').hide();
+                        }
+                    });
+
+                    $('.ratingRadio').on('change', function () {
+                        var hasText = $('#commentText').val().trim().length > 0;
+                        var hasRating = $('.ratingRadio:checked').length > 0;
+
+                        console.log('jQuery check on rating change:', {
+                            hasText: hasText,
+                            hasRating: hasRating
+                        });
+
+                        if (hasText && hasRating) {
+                            $('#submitButton').show();
+                        } else {
+                            $('#submitButton').hide();
+                        }
+                    });
+
+                    // jQuery modal handlers
+                    $('.show-out-of-stock-modal').on('click', function (e) {
+                        e.preventDefault();
+                        $('#outOfStockModal').css('display', 'flex');
+                    });
+
+                    $('.close-button, .close-modal-btn').on('click', function () {
+                        $('#outOfStockModal').hide();
+                    });
+
+                    $(window).on('click', function (e) {
+                        if (e.target == $('#outOfStockModal')[0]) {
+                            $('#outOfStockModal').hide();
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+}

@@ -1,0 +1,494 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   
+    <div class="header">
+        <div>
+            <div class="logo">SG Tech</div>
+            @if (Session["name"] == null)
+            {
+                <div class="Login">
+                    <a href="/Account/SginUp">Đăng ký</a>
+                    <a href="/Account/Index">Đăng nhập</a>
+                </div>
+            }
+            else
+            {
+                <div class="dropdown">
+                    <span class="dropbtn">@Session["name"]</span>
+                    <div class="dropdown-content">
+                        <a href="@Url.Action("logout","Account")">Đăng xuất</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="container">
+        <nav class="sidebar">
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="@Url.Action("Index","Admin")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Promotion" ? "active" : "")">
+                        Product
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Promotion","Admin")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Promotion" ? "active" : "")">
+                        Promotion
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Categoty","Admin")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Category" ? "active" : "")">
+                        Category
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ManageStaff","Admin")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "ManageStaff" ? "active" : "")">
+                        Manage Staff
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ManageUser","Admin")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "ManageUser" ? "active" : "")">
+                        Manage User
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Order","Admin")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Order" ? "active" : "")">
+                        Order
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Revenue","Admin")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Order" ? "active" : "")">
+                        Revenue
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Chat")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Order" ? "active" : "")">
+                        Chat
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            @RenderBody()
+        </main>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<style>
+    /* Reset default margins and padding */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        min-height: 100vh;
+    }
+
+    /* Header styles */
+    .header {
+        background-color: #1a1a1a;
+        height: 95px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+    }
+    .nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    /* Logo styles */
+    .logo {
+        margin-left:50px;
+        position: absolute;
+        left: 0;
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    /* Main container */
+    .container {
+        display: flex;
+        padding-top: 95px; /* Equal to header height */
+        min-height: calc(100vh - 95px);
+    }
+
+    /* Sidebar styles */
+    .sidebar {
+        width: 15%;
+        background-color: #2c2c2c;
+        min-height: 100%;
+        padding: 20px 0;
+        position: fixed;
+        left: 0;
+        top: 95px;
+        color: white;
+    }
+
+    /* Sidebar navigation */
+    .sidebar-nav {
+        list-style: none;
+    }
+
+        .sidebar-nav li {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .sidebar-nav li:hover {
+                background-color: #3a3a3a;
+            }
+
+    /* Main content area */
+    .main-content {
+        margin-top:10px;
+        margin-left: 18%; /* Equal to sidebar width */
+        padding: 20px;
+        width: 82%;
+        background-color: white;
+    }
+
+    /* Table styles */
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .data-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+    /* Button styles */
+    .btn {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-edit {
+        background-color: #f8f9fa;
+        color: #333;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    /* Search box styles */
+    .search-box {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 300px;
+    }
+
+    /* Pagination styles */
+    .pagination {
+        margin-top: 20px;
+        text-align: right;
+    }
+
+        .pagination a {
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #333;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            margin-left: 4px;
+            border-radius: 4px;
+        }
+
+            .pagination a:hover {
+                background-color: #e9ecef;
+            }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropbtn {
+        cursor: pointer;
+        color: gray;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: gray;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #f1f1f1;
+            }
+
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    //
+    /* Sidebar base styles */
+    .sidebar {
+        background-color: #1E1E2D;
+        width: 250px;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 95px;
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    /* Navigation list */
+    .sidebar-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        /* Navigation items */
+        .sidebar-nav li {
+            margin: 4px 8px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: #9899ac;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+        }
+
+            /* Hover and active states */
+            .sidebar-nav a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #ffffff;
+            }
+
+            .sidebar-nav a.active {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #ffffff;
+            }
+
+            /* Icons for navigation items */
+            .sidebar-nav a::before {
+                content: '';
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                margin-right: 12px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                opacity: 0.7;
+            }
+
+        /* Custom icons for each menu item */
+        .sidebar-nav li:nth-child(1) a::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239899ac'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 7l9-4 9 4M3 7v10l9 4 9-4V7M3 17l9-4 9 4'/%3E%3C/svg%3E");
+        }
+
+        .sidebar-nav li:nth-child(2) a::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239899ac'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .sidebar-nav li:nth-child(3) a::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239899ac'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .sidebar-nav li:nth-child(4) a::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239899ac'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .sidebar-nav li:nth-child(5) a::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239899ac'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .sidebar-nav li:nth-child(6) a::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239899ac'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .sidebar-nav li:nth-child(7) a::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239899ac'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8c-1.5 0-3 1-3 2.5s1.5 2.5 3 2.5 3 1 3 2.5S13.5 18 12 18M12 6v2m0 10v2M5 20h14M9 16l3-3 3 3M15 8l-3 3-3-3'/%3E%3C/svg%3E");
+        }
+
+        .sidebar-nav li:nth-child(8) a::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239899ac'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8c-1.5 0-3 1-3 2.5s1.5 2.5 3 2.5 3 1 3 2.5S13.5 18 12 18M12 6v2m0 10v2M5 20h14M9 16l3-3 3 3M15 8l-3 3-3-3'/%3E%3C/svg%3E");
+        }
+
+        /* Divider between sections */
+        .sidebar-nav::after {
+            content: '';
+            display: block;
+            margin: 20px 16px;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Active item indicator */
+        .sidebar-nav a.active::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background-color: #00bcd4;
+            border-radius: 2px 0 0 2px;
+        }
+        /*heder nè*/
+      /* Header container */
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 20px 30px;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end;
+    width: auto;
+}
+
+/* Login links container */
+.Login {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.Login a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.Login a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.dropbtn::after {
+    content: '▼';
+    font-size: 10px;
+    opacity: 0.7;
+    margin-left: 4px;
+}
+
+.dropbtn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dropdown content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #1E1E2D;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 8px 0;
+    margin-top: 4px;
+}
+
+.dropdown-content a {
+    color: #9899ac;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: fadeIn 0.2s ease-out forwards;
+}
+
+@@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustment */
+@@media (max-width: 768px) {
+    .header {
+        padding: 20px 15px;
+    }
+}
+</style>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5726e1c3f61e48c3917520dec2cf1bbb" Name="Diagram1">
+        <EntityTypeShape EntityType="SGTechModel.Cart" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGTechModel.Category" Width="1.5" PointX="1.5" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGTechModel.Message" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGTechModel.OrderDetail" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGTechModel.Order" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGTechModel.ProductReview" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGTechModel.Product" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGTechModel.Promotion" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGTechModel.sale" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SGTechModel.User" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="SGTechModel.FK__Cart__ProductID__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="SGTechModel.FK__Cart__UserID__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="SGTechModel.FK__Products__Catego__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="SGTechModel.FK__Messages__Receiv__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="SGTechModel.FK__Messages__Sender__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="SGTechModel.FK__OrderDeta__Order__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="SGTechModel.FK__OrderDeta__Produ__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="SGTechModel.FK__Orders__StaffID__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="SGTechModel.FK__Orders__UserID__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="SGTechModel.FK__ProductRe__Produ__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="SGTechModel.FK__ProductRe__UserI__534D60F1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
