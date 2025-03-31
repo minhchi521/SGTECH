@@ -1,4 +1,4 @@
-﻿using Microsoft.Owin;
+using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
@@ -33,8 +33,8 @@ namespace cellphones
             // Add Google authentication
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
             {
-                ClientId = "558233131696-ib37o6snsfeet7f8idjtp2rbmerpoouv.apps.googleusercontent.com",
-                ClientSecret = "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",
+                ClientId = "",
+                ClientSecret = "",
                 SignInAsAuthenticationType = "ExternalCookie"
             });
         }

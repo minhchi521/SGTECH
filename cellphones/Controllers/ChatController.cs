@@ -16,7 +16,7 @@ namespace cellphones.Controllers
 {
     public class ChatController : Controller
     {
-        // GET: Chat 
+        // GET: Chat
         SGTechEntities db = new SGTechEntities();
         // Constant for chatbot ID
         private const string CHATBOT_ID = "chatbot001";
