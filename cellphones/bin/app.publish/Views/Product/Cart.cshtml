@@ -1,0 +1,346 @@
+﻿@model IEnumerable<cellphones.Models.Cartshop>
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_LayoutUser2.cshtml";
+}
+
+<div class="cart-container">
+    <div class="cart-header">
+        <a href="@Url.Action("IndexUser", "Product")" class="back-button">
+            <i class="fas fa-chevron-left"></i> Trở về
+        </a>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <input type="hidden" id="totalAmount" value="@Model.Sum(x => x.total)" />
+        <input type="hidden" name="__RequestVerificationToken" value="@Html.AntiForgeryToken()" />
+
+        foreach (var item in Model)
+        {
+            <div class="cart-item" data-cartid="@item.cartid" data-price="@item.price.ToString("0.00")">
+                <div class="product-image">
+                    <img src="@Url.Content(item.image)" alt="@item.nameproduct" />
+                </div>
+                <div class="product-details">
+                    <h3>@item.nameproduct</h3>
+                    <div class="item-total">
+                        Giá: <span class="item-total-amount">@item.price.ToString("#,##0") ₫</span>
+                    </div>
+                    <div class="quantity-control">
+                        <span>Chọn số lượng:</span>
+                        <div class="quantity-buttons">
+                            <button type="button" class="quantity-btn minus" data-url="@Url.Action("UpdateQuantity1", "Product", new { id = item.cartid })">-</button>
+                            <input type="text" value="@item.quantity" readonly />
+                            <button type="button" class="quantity-btn plus" data-url="@Url.Action("UpdateQuantity2", "Product", new { id = item.cartid })">+</button>
+                        </div>
+                        <div class="actions">
+                            @Html.ActionLink("Xóa", "Delete", new { id = item.cartid }, new { @class = "delete-btn" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="cart-summary">
+            <div class="total-section">
+                <div class="summary-row total">
+                    <span>Tổng tiền:</span>
+                    <span class="cart-total">@Model.Sum(x => x.total).ToString("#,##0") ₫</span>
+                </div>
+            </div>
+            <button class="checkout-btn" >
+                TIẾN HÀNH ĐẶT HÀNG
+            </button>
+            <button class="continue-shopping" onclick="location.href='@Url.Action("IndexUser", "Product")'">
+                CHỌN THÊM SẢN PHẨM KHÁC
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="empty-cart">
+            <p>Giỏ hàng của bạn đang trống</p>
+            <button class="continue-shopping" onclick="location.href='@Url.Action("IndexUser", "Product")'">
+                TIẾP TỤC MUA SẮM
+            </button>
+        </div>
+    }
+</div>
+
+<style>
+    .cart-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .cart-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .back-button {
+        color: #333;
+        text-decoration: none;
+        margin-right: 20px;
+    }
+
+    .cart-item {
+        display: flex;
+        padding: 20px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        background: white;
+    }
+
+    .product-image {
+        width: 120px;
+        margin-right: 20px;
+    }
+
+    .product-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .product-details {
+        flex: 1;
+    }
+
+    .product-details h3 {
+        margin: 0 0 15px 0;
+        font-size: 1.2em;
+    }
+
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+    }
+
+    .quantity-buttons {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+    }
+
+    .quantity-btn {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #ddd;
+        background: white;
+        cursor: pointer;
+    }
+
+    .quantity-buttons input {
+        width: 40px;
+        height: 30px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-left: none;
+        border-right: none;
+    }
+
+    .delete-btn {
+        color: #d70018;
+        text-decoration: none;
+        margin-left: 20px;
+        padding: 5px 10px;
+        border: 1px solid #d70018;
+        border-radius: 4px;
+    }
+
+    .cart-summary {
+        margin-top: 20px;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #eee;
+    }
+
+    .empty-cart {
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #eee;
+    }
+
+    .empty-cart p {
+        margin-bottom: 20px;
+        font-size: 1.1em;
+        color: #666;
+    }
+
+    .checkout-btn, .continue-shopping {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .checkout-btn {
+        background: #d70018;
+        color: white;
+    }
+
+    .checkout-btn:hover {
+        background: #c40016;
+    }
+
+    .continue-shopping {
+        background: white;
+        color: #d70018;
+        border: 1px solid #d70018;
+    }
+
+    .continue-shopping:hover {
+        background: #fff5f5;
+    }
+
+    .total-section {
+        margin-bottom: 20px;
+    }
+
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .summary-row.total {
+        border-bottom: none;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #d70018;
+    }
+
+    .price-update {
+        animation: priceUpdate 0.3s ease-in-out;
+    }
+
+    @@keyframes priceUpdate {
+        0% { opacity: 0.5; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.1); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
+    .quantity-btn.loading {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+    .error-message {
+        color: #d70018;
+        margin-top: 10px;
+        font-size: 0.9em;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let isUpdating = false;
+
+        function formatPrice(price) {
+            return new Intl.NumberFormat('vi-VN').format(price) + ' ₫';
+        }
+
+        function updateCartTotals() {
+            let total = 0;
+            document.querySelectorAll('.cart-item').forEach(item => {
+                const quantity = parseInt(item.querySelector('input[type="text"]').value) || 0;
+                const price = parseFloat(item.dataset.price) || 0;
+                const itemTotal = quantity * price;
+
+                if (!isNaN(itemTotal)) {
+                    total += itemTotal;
+                    const itemTotalElement = item.querySelector('.item-total-amount');
+                    itemTotalElement.textContent = formatPrice(itemTotal);
+                    itemTotalElement.classList.add('price-update');
+                    setTimeout(() => itemTotalElement.classList.remove('price-update'), 300);
+                }
+            });
+
+            if (!isNaN(total)) {
+                const totalElement = document.querySelector('.cart-total');
+                if (totalElement) {
+                    totalElement.textContent = formatPrice(total);
+                    totalElement.classList.add('price-update');
+                    setTimeout(() => totalElement.classList.remove('price-update'), 300);
+                }
+
+                // Update hidden total amount input
+                const totalAmountInput = document.getElementById('totalAmount');
+                if (totalAmountInput) {
+                    totalAmountInput.value = total;
+                }
+            }
+        }
+
+        function handleQuantityUpdate(button) {
+            if (isUpdating) return;
+            isUpdating = true;
+
+            const url = button.dataset.url;
+            const cartItem = button.closest('.cart-item');
+            const quantityInput = cartItem.querySelector('input[type="text"]');
+
+            button.classList.add('loading');
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        quantityInput.value = data.newQuantity;
+                        updateCartTotals();
+                    } else {
+                        const errorMessage = document.createElement('div');
+                        errorMessage.className = 'error-message';
+                        errorMessage.textContent = data.message;
+                        cartItem.appendChild(errorMessage);
+                        setTimeout(() => errorMessage.remove(), 2000);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                })
+                .finally(() => {
+                    button.classList.remove('loading');
+                    isUpdating = false;
+                });
+        }
+
+        document.querySelectorAll('.quantity-btn').forEach(button => {
+            button.addEventListener('click', () => handleQuantityUpdate(button));
+        });
+
+
+        // Initialize totals on page load
+        updateCartTotals();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('.checkout-btn').addEventListener('click', function () {
+        const totalAmount = document.getElementById('totalAmount').value;
+        window.location.href = '@Url.Action("Books", "Product")?totalAmount=' + totalAmount;
+    });
+  });
+</script>

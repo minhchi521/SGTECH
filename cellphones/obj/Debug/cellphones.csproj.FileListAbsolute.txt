@@ -301,7 +301,6 @@ D:\SGTECH\cellphones\bin\System.Web.WebPages.Deployment.xml
 D:\SGTECH\cellphones\bin\System.Web.WebPages.Razor.xml
 D:\SGTECH\cellphones\bin\Antlr3.Runtime.pdb
 D:\SGTECH\cellphones\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\SGTECH\cellphones\obj\Debug\cellphones.csproj.AssemblyReference.cache
 D:\SGTECH\cellphones\obj\Debug\cellphones.csproj.CoreCompileInputs.cache
 D:\SGTECH\cellphones\obj\Debug\cellphones.csproj.CopyComplete
 D:\SGTECH\cellphones\obj\Debug\cellphones.dll

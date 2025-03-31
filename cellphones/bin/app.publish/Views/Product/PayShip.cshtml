@@ -1,0 +1,239 @@
+﻿@model cellphones.Models.Order
+@{
+    ViewBag.Title = "Payment on Delivery";
+    Layout = "~/Views/Shared/_LayoutUser2.cshtml";
+}
+
+<div class="cart-container">
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-modal-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Đặt hàng thành công!</h3>
+            <p>Đơn hàng của bạn đã được đặt thành công.</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "orderForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <!-- Payment Section -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-money-bill-wave me-2"></i>Thanh toán tiền mặt khi giao hàng</h4>
+                </div>
+                <div class="card-body">
+                    <div class="payment-info p-3 mb-4 bg-light rounded">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="info-group mb-3">
+                                    <label class="text-muted small">Order ID</label>
+                                    <p class="mb-0 font-weight-bold">@Model.OrderID</p>
+                                    @Html.HiddenFor(model => model.OrderID)
+                                </div>
+                                <div class="info-group mb-3">
+                                    <label class="text-muted small">Date</label>
+                                    <p class="mb-0">@Model.OrderDate.Value.ToString("dd/MM/yyyy HH:mm")</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-group mb-3">
+                                    <label class="text-muted small">Amount</label>
+                                    <p class="mb-0 font-weight-bold text-primary">@Model.TotalAmount.ToString("N0") VND</p>
+                                </div>
+                                <div class="info-group mb-3">
+                                    <label class="text-muted small">Status</label>
+                                    <p class="mb-0 font-weight-bold text-primary">@Model.PaymentStatus</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-instructions mb-4">
+                        <div class="alert alert-info d-flex">
+                            <i class="fas fa-info-circle me-3 mt-1"></i>
+                            <div>
+                                <h5 class="alert-heading">Cash on Delivery</h5>
+                                <p class="mb-0">Please provide your shipping address below. You'll pay the amount of <strong>@Model.TotalAmount.ToString("N0") VND</strong> when your order arrives.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group row mb-4">
+                            <label class="col-md-3 col-form-label">Shipping Address <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                @Html.TextAreaFor(model => model.ShippingAddress, new { @class = "form-control", rows = "3", placeholder = "Enter your full shipping address" })
+                                @Html.ValidationMessageFor(model => model.ShippingAddress, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-9 offset-md-3">
+                                <button type="submit" class="checkout-btn">
+                                    <i class="fas fa-check me-2"></i> Confirm Order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .cart-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+    }
+
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+        border: none;
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #0062cc, #007bff);
+        padding: 15px 20px;
+    }
+
+    .info-group label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .payment-info {
+        border-left: 4px solid #007bff;
+    }
+
+    .checkout-btn {
+        width: 100%;
+        padding: 12px 15px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #d70018;
+        color: white;
+        font-size: 1rem;
+    }
+
+        .checkout-btn:hover {
+            background: #c40016;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(215, 0, 24, 0.2);
+        }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+    /* Success Modal */
+    .success-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .success-modal-content {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .success-icon {
+        font-size: 60px;
+        color: #28a745;
+        margin-bottom: 20px;
+    }
+
+    .loading-bar {
+        height: 4px;
+        background-color: #e9ecef;
+        border-radius: 2px;
+        margin-top: 20px;
+        overflow: hidden;
+    }
+
+    .loading-progress {
+        height: 100%;
+        width: 0%;
+        background-color: #28a745;
+        transition: width 4s linear;
+    }
+
+    /* Responsive adjustments */
+    @@media (max-width: 768px) {
+        .col-form-label {
+            margin-bottom: 0.5rem;
+        }
+
+        .success-modal-content {
+            width: 85%;
+            padding: 20px;
+        }
+    }
+</style>
+
+<!-- Add Font Awesome for icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the form element
+        const form = document.getElementById('orderForm');
+
+        // Add submit event listener
+        form.addEventListener('submit', function (e) {
+            // Only if form is valid
+            if (form.checkValidity()) {
+                e.preventDefault(); // Prevent immediate form submission
+
+                // Show success modal
+                const modal = document.getElementById('successModal');
+                modal.style.display = 'flex';
+
+                // Start progress bar animation
+                const progressBar = document.querySelector('.loading-progress');
+                progressBar.style.width = '100%';
+
+                // Submit form after 4 seconds
+                setTimeout(function () {
+                    form.submit(); // Submit the form after delay
+                }, 2000);
+            }
+        });
+    });
+</script>

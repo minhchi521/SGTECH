@@ -1,0 +1,184 @@
+﻿@model IEnumerable<cellphones.Models.OrderDetail>
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+}
+
+<div class="order-details-container">
+    <div class="order-header">
+        <h2>Chi tiết sản phẩm trong đơn hàng</h2>
+        <p class="order-subtitle">Danh sách các sản phẩm đã đặt</p>
+    </div>
+
+    <div class="order-table-container">
+        <table class="order-table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.ProductID)</th>
+                    <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+                    <th>@Html.DisplayNameFor(model => model.UnitPrice)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ProductID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                        <td class="price-column">@Html.DisplayFor(modelItem => item.UnitPrice)đ</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="total-label">Tổng cộng:</td>
+                    <td class="total-value">@Model.Sum(item => item.UnitPrice)đ</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="order-actions">
+        <a href="javascript:history.back()" class="back-button">Quay lại</a>
+        <a href="@Url.Action("Index", "Home")" class="home-button">Trang chủ</a>
+    </div>
+</div>
+
+<style>
+    .order-details-container {
+        max-width: 900px;
+        margin: 30px auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .order-header {
+        margin-bottom: 25px;
+    }
+
+    .order-header h2 {
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .order-subtitle {
+        color: #666;
+        font-size: 16px;
+        margin-top: 0;
+    }
+
+    .order-table-container {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        margin-bottom: 25px;
+    }
+
+    .order-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .order-table th {
+        background-color: #f5f7fa;
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        color: #333;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .order-table td {
+        padding: 15px;
+        border-bottom: 1px solid #f0f0f0;
+        color: #444;
+    }
+
+    .order-table tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    .price-column {
+        text-align: right;
+        font-weight: 500;
+    }
+
+    .order-table tfoot {
+        background-color: #f8f9fb;
+    }
+
+    .order-table tfoot td {
+        padding: 15px;
+        border-top: 2px solid #e0e0e0;
+    }
+
+    .total-label {
+        text-align: right;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .total-value {
+        text-align: right;
+        font-weight: 700;
+        color: #2196F3;
+        font-size: 18px;
+    }
+
+    .order-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: flex-end;
+    }
+
+    .back-button, .home-button {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .back-button {
+        background-color: white;
+        color: #666;
+        border: 1px solid #ddd;
+    }
+
+    .back-button:hover {
+        background-color: #f5f5f5;
+    }
+
+    .home-button {
+        background-color: #2196F3;
+        color: white;
+        border: 1px solid #2196F3;
+    }
+
+    .home-button:hover {
+        background-color: #0d8aee;
+    }
+
+    /* Responsive styling */
+    @@media (max-width: 768px) {
+        .order-table th, .order-table td {
+            padding: 10px;
+        }
+
+        .order-table {
+            font-size: 14px;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .order-actions {
+            flex-direction: column;
+        }
+
+        .back-button, .home-button {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>

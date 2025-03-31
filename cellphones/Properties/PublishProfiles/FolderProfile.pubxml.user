@@ -1,0 +1,627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\SGTECH\cellphones\bin\app.publish\</_PublishTargetUrl>
+    <History>True|2025-03-31T14:08:45.6510258Z;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>09/10/2013 16:29:20</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>09/10/2013 16:29:20</publishTime>
+    </File>
+    <File Include="bin/cellphones.dll">
+      <publishTime>03/31/2025 21:08:44</publishTime>
+    </File>
+    <File Include="bin/cellphones.pdb">
+      <publishTime>03/31/2025 21:08:44</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>10/23/2017 13:15:18</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>10/23/2017 13:15:20</publishTime>
+    </File>
+    <File Include="bin/EPPlus.dll">
+      <publishTime>02/06/2025 22:10:58</publishTime>
+    </File>
+    <File Include="bin/EPPlus.Interfaces.dll">
+      <publishTime>11/15/2024 20:59:58</publishTime>
+    </File>
+    <File Include="bin/EPPlus.System.Drawing.dll">
+      <publishTime>11/15/2024 21:00:14</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
+      <publishTime>06/21/2023 17:16:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
+      <publishTime>06/21/2023 17:16:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Bcl.AsyncInterfaces.dll">
+      <publishTime>10/23/2021 06:42:08</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>09/05/2018 16:10:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Logging.Abstractions.dll">
+      <publishTime>10/23/2021 06:51:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IO.RecyclableMemoryStream.dll">
+      <publishTime>06/12/2024 03:23:46</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>05/11/2022 06:31:20</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>05/11/2022 06:31:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
+      <publishTime>05/11/2022 06:31:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.dll">
+      <publishTime>05/11/2022 06:31:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Google.dll">
+      <publishTime>05/11/2022 06:31:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
+      <publishTime>02/13/2015 20:16:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>07/25/2012 11:48:56</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>11/09/2019 07:56:44</publishTime>
+    </File>
+    <File Include="bin/OpenAI.dll">
+      <publishTime>12/05/2024 06:06:02</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>11/13/2012 19:19:34</publishTime>
+    </File>
+    <File Include="bin/Pipelines.Sockets.Unofficial.dll">
+      <publishTime>05/04/2023 21:36:38</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe.config">
+      <publishTime>08/08/2018 12:18:12</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.rsp">
+      <publishTime>08/08/2018 12:09:42</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe.config">
+      <publishTime>08/08/2018 12:18:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.rsp">
+      <publishTime>08/08/2018 12:09:56</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>08/08/2018 12:09:42</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
+      <publishTime>12/05/2017 09:36:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
+      <publishTime>12/05/2017 09:36:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Managed.Core.targets">
+      <publishTime>08/08/2018 12:09:42</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>08/08/2018 12:09:42</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Win32.Primitives.dll">
+      <publishTime>11/05/2016 18:55:32</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.AppContext.dll">
+      <publishTime>11/05/2016 18:55:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>05/16/2018 03:29:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Console.dll">
+      <publishTime>11/05/2016 18:55:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>11/05/2016 18:55:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.FileVersionInfo.dll">
+      <publishTime>11/05/2016 18:55:56</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
+      <publishTime>11/05/2016 18:55:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Globalization.Calendars.dll">
+      <publishTime>11/05/2016 18:56:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Compression.dll">
+      <publishTime>11/05/2016 18:56:08</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Compression.ZipFile.dll">
+      <publishTime>11/05/2016 18:56:04</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.dll">
+      <publishTime>11/05/2016 18:56:08</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
+      <publishTime>11/05/2016 18:56:08</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Net.Http.dll">
+      <publishTime>11/05/2016 18:56:30</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Net.Sockets.dll">
+      <publishTime>11/05/2016 18:56:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>05/16/2018 03:29:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Runtime.InteropServices.RuntimeInformation.dll">
+      <publishTime>11/05/2016 18:57:00</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Algorithms.dll">
+      <publishTime>11/05/2016 18:57:14</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Encoding.dll">
+      <publishTime>11/05/2016 18:57:08</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Primitives.dll">
+      <publishTime>11/05/2016 18:57:18</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.X509Certificates.dll">
+      <publishTime>11/05/2016 18:57:18</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Text.Encoding.CodePages.dll">
+      <publishTime>11/05/2016 18:57:20</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Threading.Tasks.Extensions.dll">
+      <publishTime>11/05/2016 18:57:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.ValueTuple.dll">
+      <publishTime>11/05/2016 18:57:30</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.ReaderWriter.dll">
+      <publishTime>11/05/2016 18:57:36</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XmlDocument.dll">
+      <publishTime>11/05/2016 18:57:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XPath.dll">
+      <publishTime>11/05/2016 18:57:40</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XPath.XDocument.dll">
+      <publishTime>11/05/2016 18:57:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe.config">
+      <publishTime>08/08/2018 12:18:18</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.rsp">
+      <publishTime>08/08/2018 12:09:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>08/08/2018 12:18:16</publishTime>
+    </File>
+    <File Include="bin/StackExchange.Redis.dll">
+      <publishTime>03/07/2025 07:07:10</publishTime>
+    </File>
+    <File Include="bin/System.Buffers.dll">
+      <publishTime>02/19/2020 17:05:18</publishTime>
+    </File>
+    <File Include="bin/System.ClientModel.dll">
+      <publishTime>10/10/2024 04:14:40</publishTime>
+    </File>
+    <File Include="bin/System.ComponentModel.Annotations.dll">
+      <publishTime>05/15/2018 20:29:36</publishTime>
+    </File>
+    <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>02/16/2023 07:33:28</publishTime>
+    </File>
+    <File Include="bin/System.Drawing.Common.dll">
+      <publishTime>03/20/2024 06:40:58</publishTime>
+    </File>
+    <File Include="bin/System.Drawing.Common.pdb">
+      <publishTime>03/20/2024 06:40:58</publishTime>
+    </File>
+    <File Include="bin/System.Interactive.Async.dll">
+      <publishTime>11/10/2020 22:53:32</publishTime>
+    </File>
+    <File Include="bin/System.IO.Pipelines.dll">
+      <publishTime>11/26/2020 09:00:22</publishTime>
+    </File>
+    <File Include="bin/System.Linq.Async.dll">
+      <publishTime>11/10/2020 22:53:32</publishTime>
+    </File>
+    <File Include="bin/System.Memory.Data.dll">
+      <publishTime>10/23/2021 06:48:06</publishTime>
+    </File>
+    <File Include="bin/System.Memory.dll">
+      <publishTime>05/08/2022 10:31:02</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>11/28/2018 20:00:36</publishTime>
+    </File>
+    <File Include="bin/System.Numerics.Vectors.dll">
+      <publishTime>05/15/2018 20:29:44</publishTime>
+    </File>
+    <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>10/23/2021 06:40:18</publishTime>
+    </File>
+    <File Include="bin/System.Text.Encodings.Web.dll">
+      <publishTime>10/23/2021 06:41:14</publishTime>
+    </File>
+    <File Include="bin/System.Text.Json.dll">
+      <publishTime>09/10/2024 13:23:08</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Channels.dll">
+      <publishTime>10/20/2020 01:46:24</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Tasks.Extensions.dll">
+      <publishTime>02/19/2020 17:05:18</publishTime>
+    </File>
+    <File Include="bin/System.ValueTuple.dll">
+      <publishTime>05/15/2018 20:29:52</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>11/28/2018 13:04:24</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>11/28/2018 20:01:00</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>11/28/2018 12:59:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>02/11/2014 15:26:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>11/28/2018 13:00:12</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>11/28/2018 13:04:24</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>11/28/2018 13:04:24</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>11/28/2018 13:04:24</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>01/23/2014 13:57:34</publishTime>
+    </File>
+    <File Include="Content/bootstrap-theme.css">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Content/bootstrap-theme.css.map">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Content/bootstrap-theme.min.css">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Content/bootstrap-theme.min.css.map">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css.map">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css.map">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Content/icon/icons8-app-store.svg">
+      <publishTime>03/17/2025 13:22:20</publishTime>
+    </File>
+    <File Include="Content/icon/icons8-facebook.svg">
+      <publishTime>03/17/2025 10:44:52</publishTime>
+    </File>
+    <File Include="Content/icon/icons8-google-play.svg">
+      <publishTime>03/17/2025 13:18:22</publishTime>
+    </File>
+    <File Include="Content/icon/icons8-google.svg">
+      <publishTime>03/17/2025 10:54:34</publishTime>
+    </File>
+    <File Include="Content/icon/icons8-instagram-logo.svg">
+      <publishTime>03/17/2025 13:22:08</publishTime>
+    </File>
+    <File Include="Content/icon/icons8-telegram.svg">
+      <publishTime>03/17/2025 13:30:25</publishTime>
+    </File>
+    <File Include="Content/icon/icons8-tiktok-logo.svg">
+      <publishTime>03/17/2025 13:27:20</publishTime>
+    </File>
+    <File Include="Content/icon/icons8-youtube-logo.svg">
+      <publishTime>03/17/2025 13:28:44</publishTime>
+    </File>
+    <File Include="Content/image/KV-final-12-1024x666.jpg">
+      <publishTime>03/17/2025 13:48:19</publishTime>
+    </File>
+    <File Include="Content/image/maxresdefault-5.jpg">
+      <publishTime>03/09/2025 20:50:08</publishTime>
+    </File>
+    <File Include="Content/image/qrcode.png">
+      <publishTime>03/09/2025 22:04:41</publishTime>
+    </File>
+    <File Include="Content/image/width660height371.jpg">
+      <publishTime>03/09/2025 20:50:08</publishTime>
+    </File>
+    <File Include="Content/javascipt/chuyen.js">
+      <publishTime>02/21/2025 00:13:07</publishTime>
+    </File>
+    <File Include="Content/main.css">
+      <publishTime>02/22/2025 18:45:32</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>02/03/2025 13:39:21</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>02/03/2025 13:39:21</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>02/03/2025 13:39:26</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>02/03/2025 13:39:26</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>02/03/2025 13:39:26</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>02/03/2025 13:39:26</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>02/03/2025 13:39:21</publishTime>
+    </File>
+    <File Include="Models/SGTech.edmx.diagram">
+      <publishTime>03/05/2025 19:13:11</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>02/03/2025 13:39:26</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>02/03/2025 13:39:26</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.4.1.js">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.4.1.min.js">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.4.1.min.map">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.4.1.slim.js">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.4.1.slim.min.js">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.4.1.slim.min.map">
+      <publishTime>02/03/2025 13:39:27</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>02/03/2025 13:39:30</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>02/03/2025 13:39:30</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>02/03/2025 13:39:30</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>02/03/2025 13:39:30</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.8.3.js">
+      <publishTime>02/03/2025 13:39:29</publishTime>
+    </File>
+    <File Include="Views/Account/ForgetPassword.cshtml">
+      <publishTime>02/23/2025 15:19:45</publishTime>
+    </File>
+    <File Include="Views/Account/Index.cshtml">
+      <publishTime>03/23/2025 23:23:01</publishTime>
+    </File>
+    <File Include="Views/Account/SginUp.cshtml">
+      <publishTime>03/17/2025 10:56:40</publishTime>
+    </File>
+    <File Include="Views/Account/UpdatePassword.cshtml">
+      <publishTime>02/23/2025 15:24:19</publishTime>
+    </File>
+    <File Include="Views/Admin/Categoty.cshtml">
+      <publishTime>03/07/2025 19:40:06</publishTime>
+    </File>
+    <File Include="Views/Admin/ColumnChart.cshtml">
+      <publishTime>02/24/2025 14:39:30</publishTime>
+    </File>
+    <File Include="Views/Admin/Create.cshtml">
+      <publishTime>03/08/2025 23:37:38</publishTime>
+    </File>
+    <File Include="Views/Admin/CreateCategoty.cshtml">
+      <publishTime>02/14/2025 18:46:47</publishTime>
+    </File>
+    <File Include="Views/Admin/CreatePromtion.cshtml">
+      <publishTime>02/16/2025 17:36:36</publishTime>
+    </File>
+    <File Include="Views/Admin/Detail.cshtml">
+      <publishTime>03/03/2025 14:23:39</publishTime>
+    </File>
+    <File Include="Views/Admin/DetailPromotion.cshtml">
+      <publishTime>02/16/2025 21:24:38</publishTime>
+    </File>
+    <File Include="Views/Admin/DetailsSales.cshtml">
+      <publishTime>03/16/2025 21:34:54</publishTime>
+    </File>
+    <File Include="Views/Admin/DetailsSales1.cshtml">
+      <publishTime>03/07/2025 20:17:24</publishTime>
+    </File>
+    <File Include="Views/Admin/DetailsUser.cshtml">
+      <publishTime>03/09/2025 22:05:19</publishTime>
+    </File>
+    <File Include="Views/Admin/DetailUser.cshtml">
+      <publishTime>02/16/2025 21:24:41</publishTime>
+    </File>
+    <File Include="Views/Admin/Edit.cshtml">
+      <publishTime>03/28/2025 18:44:06</publishTime>
+    </File>
+    <File Include="Views/Admin/EditPromotion.cshtml">
+      <publishTime>02/16/2025 20:56:15</publishTime>
+    </File>
+    <File Include="Views/Admin/EditUser.cshtml">
+      <publishTime>03/09/2025 21:47:25</publishTime>
+    </File>
+    <File Include="Views/Admin/Index.cshtml">
+      <publishTime>03/09/2025 20:27:42</publishTime>
+    </File>
+    <File Include="Views/Admin/ManageReview.cshtml">
+      <publishTime>03/05/2025 19:14:09</publishTime>
+    </File>
+    <File Include="Views/Admin/ManageReviewDetails.cshtml">
+      <publishTime>03/05/2025 19:14:09</publishTime>
+    </File>
+    <File Include="Views/Admin/ManageStaff.cshtml">
+      <publishTime>02/23/2025 15:51:55</publishTime>
+    </File>
+    <File Include="Views/Admin/ManageUser.cshtml">
+      <publishTime>03/09/2025 21:42:52</publishTime>
+    </File>
+    <File Include="Views/Admin/Order.cshtml">
+      <publishTime>03/07/2025 19:44:16</publishTime>
+    </File>
+    <File Include="Views/Admin/Orderdetail.cshtml">
+      <publishTime>02/16/2025 21:12:33</publishTime>
+    </File>
+    <File Include="Views/Admin/Promotion.cshtml">
+      <publishTime>03/07/2025 19:38:15</publishTime>
+    </File>
+    <File Include="Views/Admin/Revenue.cshtml">
+      <publishTime>03/16/2025 21:33:54</publishTime>
+    </File>
+    <File Include="Views/Chat/ChatBot.cshtml">
+      <publishTime>03/24/2025 10:37:08</publishTime>
+    </File>
+    <File Include="Views/Chat/Index.cshtml">
+      <publishTime>03/05/2025 20:56:47</publishTime>
+    </File>
+    <File Include="Views/Chat/Messages.cshtml">
+      <publishTime>03/09/2025 17:56:42</publishTime>
+    </File>
+    <File Include="Views/Chat/MessagesAdmin.cshtml">
+      <publishTime>03/05/2025 20:56:47</publishTime>
+    </File>
+    <File Include="Views/Home/About.cshtml">
+      <publishTime>02/03/2025 13:39:21</publishTime>
+    </File>
+    <File Include="Views/Home/Contact.cshtml">
+      <publishTime>02/03/2025 13:39:21</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>02/03/2025 13:39:21</publishTime>
+    </File>
+    <File Include="Views/Product/BooksNoLogin.cshtml">
+      <publishTime>03/17/2025 11:06:57</publishTime>
+    </File>
+    <File Include="Views/Product/BuyPremium.cshtml">
+      <publishTime>03/16/2025 16:34:50</publishTime>
+    </File>
+    <File Include="Views/Product/Cart.cshtml">
+      <publishTime>03/09/2025 17:56:38</publishTime>
+    </File>
+    <File Include="Views/Product/ChangePassword.cshtml">
+      <publishTime>03/09/2025 14:30:13</publishTime>
+    </File>
+    <File Include="Views/Product/DetailProduct.cshtml">
+      <publishTime>03/16/2025 19:03:30</publishTime>
+    </File>
+    <File Include="Views/Product/DetailsHistory.cshtml">
+      <publishTime>03/09/2025 14:30:13</publishTime>
+    </File>
+    <File Include="Views/Product/EditProfile.cshtml">
+      <publishTime>03/07/2025 18:44:28</publishTime>
+    </File>
+    <File Include="Views/Product/HistoryBuyProduct.cshtml">
+      <publishTime>03/07/2025 18:44:28</publishTime>
+    </File>
+    <File Include="Views/Product/IndexUser.cshtml">
+      <publishTime>03/24/2025 10:37:08</publishTime>
+    </File>
+    <File Include="Views/Product/offers.cshtml">
+      <publishTime>03/09/2025 22:08:23</publishTime>
+    </File>
+    <File Include="Views/Product/PayShip.cshtml">
+      <publishTime>03/17/2025 11:06:57</publishTime>
+    </File>
+    <File Include="Views/Product/profile.cshtml">
+      <publishTime>03/18/2025 17:47:49</publishTime>
+    </File>
+    <File Include="Views/Product/SearchCartPhone.cshtml">
+      <publishTime>03/07/2025 14:44:51</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>02/03/2025 13:39:21</publishTime>
+    </File>
+    <File Include="Views/Shared/LayoutProfile.cshtml">
+      <publishTime>03/04/2025 23:22:46</publishTime>
+    </File>
+    <File Include="Views/Shared/login.cshtml">
+      <publishTime>03/17/2025 10:52:40</publishTime>
+    </File>
+    <File Include="Views/Shared/Signup.cshtml">
+      <publishTime>03/17/2025 10:56:09</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>03/05/2025 20:02:08</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutUser.cshtml">
+      <publishTime>03/17/2025 13:30:38</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutUser2.cshtml">
+      <publishTime>03/17/2025 11:18:56</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>03/23/2025 17:35:14</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>02/03/2025 13:39:21</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>03/31/2025 21:08:44</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
