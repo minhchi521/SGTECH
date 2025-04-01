@@ -305,3 +305,4 @@ D:\SGTECH\cellphones\obj\Debug\cellphones.csproj.CoreCompileInputs.cache
 D:\SGTECH\cellphones\obj\Debug\cellphones.csproj.CopyComplete
 D:\SGTECH\cellphones\obj\Debug\cellphones.dll
 D:\SGTECH\cellphones\obj\Debug\cellphones.pdb
+D:\SGTECH\cellphones\obj\Debug\cellphones.csproj.AssemblyReference.cache
