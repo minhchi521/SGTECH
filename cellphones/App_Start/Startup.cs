@@ -33,8 +33,8 @@ namespace cellphones
             // Add Google authentication
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
             {
-                ClientId ="yourID",
-                ClientSecret = "YourID",
+                ClientId = "yourkey",
+                ClientSecret = "yourkey",
                 SignInAsAuthenticationType = "ExternalCookie"
             });
         }

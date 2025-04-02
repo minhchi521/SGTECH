@@ -4,6 +4,7 @@
     ViewBag.Title = "IndexUser";
     @Styles.Render("~/Content/javascipt/chuyen.js")
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
+
 }
 
 <div class="section-title">
@@ -14,220 +15,211 @@
     <div class="book-grid">
         @foreach (var item in Model)
         {
-            <div>
-                <div class="book-card">
-                    <a href="@Url.Action("DetailProduct", "Product", new { id = item.ProductID })">
-                        <img src="@Url.Content(item.Image)"
-                             alt="@item.ProductName"
-                             class="book-image"
-                             dat-idtruyen="@item.ProductID">
-                    </a>
-                    <div class="book-info">
-                        <h3 class="book-title">@item.ProductName</h3>
-                        <h4 class="book-title">@item.Price</h4>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        @if (item.StockQuantity <= 0)
-                        {
-                            <div class="out-of-stock">Hết hàng</div>
-                        }
-                    </div>
+        <div>
+            <div class="book-card">
+                <a href="@Url.Action("DetailProduct", "Product", new { id = item.ProductID })">
+                    <img src="@Url.Content(item.Image)"
+                         alt="@item.ProductName"
+                         class="book-image"
+                         dat-idtruyen="@item.ProductID">
+                </a>
+                <div class="book-info">
+                    <h3 class="book-title">@item.ProductName</h3>
+                    <h4 class="book-title">@item.Price</h4>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    @if (item.StockQuantity <= 0)
+                    {
+                       <div class="out-of-stock">Hết hàng</div>                
+                    }
                 </div>
             </div>
+        </div>
         }
     </div>
 </main>
-
-<!-- Floating Chat Bubble -->
-<div id="chatBubble" class="chat-bubble">
-    <i class="fa fa-comment"></i>
-</div>
-
-<!-- Chat Window -->
-<div id="chatWindow" class="chat-window">
-    <div class="chat-header">
-        <div class="chat-title">
-            <i class="fa fa-robot me-2"></i>
-            <span>SGTech Assistant</span>
-        </div>
-        <div class="chat-actions">
-            <button id="minimizeChat" class="btn-action">
-                <i class="fa fa-minus"></i>
-            </button>
-            <button id="closeChat" class="btn-action">
-                <i class="fa fa-times"></i>
-            </button>
-        </div>
-    </div>
-
-    <div id="chatMessages" class="chat-messages">
-        <div class="bot-message">
-            <div class="bot-avatar">
-                <i class="fa fa-robot"></i>
-            </div>
-            <div class="message-content">
-                Chào mừng bạn đến với SGTech Assistant! Tôi có thể giúp gì cho bạn?
-            </div>
-        </div>
-    </div>
-
-    <div class="chat-input">
-        <input type="text" id="userInput" placeholder="Nhập tin nhắn..." />
-        <button id="sendMessage">
-            <i class="fa fa-paper-plane"></i>
-        </button>
-    </div>
-</div>
-
 <style>
-    /* Original styles from your page */
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 15px;
-        width: 100%;
-        box-sizing: border-box;
+   .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Category list styling */
+.category-list {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px auto;
+    max-width: 1200px;
+    padding: 0 15px;
+    flex-wrap: wrap;
+}
+
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    min-width: 120px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.category-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background-color: #e9ecef;
+}
+
+.category-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #00b7bd;
+}
+
+/* Section title styling */
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 40px auto 20px;
+    padding: 0 15px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.section-title h2 {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+}
+
+.view-all {
+    color: #00b7bd;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.view-all:hover {
+    color: #008489;
+    text-decoration: underline;
+}
+
+/* Product grid styling - this is the key part for horizontal layout */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+/* Product card styling */
+.book-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.book-card a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+}
+
+.book-card img {
+    width: auto;
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain; /* Changed from cover to contain for better product display */
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+}
+
+.book-card:hover img {
+    transform: scale(1.05);
+}
+
+.book-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.book-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stars {
+    margin-top: auto;
+    color: #ffc107;
+}
+
+/* Responsive adjustments */
+@@media (max-width: 768px) {
+    .book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 20px;
     }
 
-    /* Category list styling */
     .category-list {
-        display: flex;
-        justify-content: space-between;
-        margin: 30px auto;
-        max-width: 1200px;
-        padding: 0 15px;
-        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
     }
 
     .category-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        cursor: pointer;
-        padding: 15px;
-        border-radius: 10px;
-        transition: all 0.3s ease;
-        background-color: #f8f9fa;
-        min-width: 120px;
-        text-align: center;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    .category-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        background-color: #e9ecef;
-    }
-
-    .category-icon {
-        font-size: 24px;
-        margin-bottom: 10px;
-        color: #00b7bd;
-    }
-
-    /* Section title styling */
-    .section-title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 1200px;
-        margin: 40px auto 20px;
-        padding: 0 15px;
-        border-bottom: 2px solid #f0f0f0;
-        padding-bottom: 10px;
+        min-width: 100px;
     }
 
     .section-title h2 {
-        font-size: 24px;
-        margin: 0;
-        color: #333;
+        font-size: 20px;
     }
+}
 
-    .view-all {
-        color: #00b7bd;
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.3s ease;
-    }
-
-    .view-all:hover {
-        color: #008489;
-        text-decoration: underline;
-    }
-
-    /* Product grid styling - this is the key part for horizontal layout */
+@@media (max-width: 480px) {
     .book-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 30px;
-        margin-bottom: 30px;
-        padding-top: 20px;
-        width: 100%;
-    }
-
-    /* Product card styling */
-    .book-card {
-        background-color: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-
-    .book-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-    }
-
-    .book-card a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 200px;
-        overflow: hidden;
-        background-color: #f8f9fa;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 15px;
     }
 
     .book-card img {
-        width: auto;
-        max-width: 100%;
-        height: 200px;
-        object-fit: contain; /* Changed from cover to contain for better product display */
-        display: block;
-        margin: 0 auto;
-        transition: transform 0.3s ease;
-    }
-
-    .book-card:hover img {
-        transform: scale(1.05);
-    }
-
-    .book-info {
-        padding: 15px;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
+        height: 150px;
     }
 
     .book-title {
-        font-size: 1.2em;
-        margin-bottom: 10px;
-        color: #333;
-        line-height: 1.4;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        font-size: 1em;
     }
-
-    .stars {
-        margin-top: auto;
-        color: #ffc107;
-    }
-
     .out-of-stock {
         color: #e53935;
         font-weight: bold;
@@ -237,376 +229,5 @@
         border-radius: 4px;
         text-align: center;
     }
-
-    /* Floating Chat Styles */
-    .chat-bubble {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        background-color: #00b7bd;
-        border-radius: 50%;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        cursor: pointer;
-        z-index: 1000;
-        transition: all 0.3s ease;
-    }
-
-    .chat-bubble i {
-        font-size: 24px;
-    }
-
-    .chat-bubble:hover {
-        transform: scale(1.1);
-        background-color: #008489;
-    }
-
-    .chat-window {
-        display: none;
-        position: fixed;
-        bottom: 90px;
-        right: 20px;
-        width: 350px;
-        height: 450px;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-        z-index: 1000;
-        overflow: hidden;
-        flex-direction: column;
-    }
-
-    .chat-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 15px;
-        background-color: #00b7bd;
-        color: white;
-        border-radius: 10px 10px 0 0;
-    }
-
-    .chat-title {
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-    }
-
-    .chat-title i {
-        margin-right: 8px;
-    }
-
-    .chat-actions {
-        display: flex;
-        gap: 5px;
-    }
-
-    .btn-action {
-        background: transparent;
-        border: none;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        transition: background-color 0.3s;
-    }
-
-    .btn-action:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .chat-messages {
-        flex-grow: 1;
-        padding: 15px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        height: calc(100% - 110px);
-    }
-
-    .bot-message, .user-message {
-        display: flex;
-        max-width: 80%;
-        margin-bottom: 10px;
-    }
-
-    .user-message {
-        margin-left: auto;
-        flex-direction: row-reverse;
-    }
-
-    .bot-avatar {
-        width: 32px;
-        height: 32px;
-        background-color: #00b7bd;
-        border-radius: 50%;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 8px;
-    }
-
-    .message-content {
-        background-color: #f1f1f1;
-        padding: 10px 15px;
-        border-radius: 18px;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    }
-
-    .user-message .message-content {
-        background-color: #00b7bd;
-        color: white;
-        margin-right: 8px;
-    }
-
-    .chat-input {
-        padding: 10px 15px;
-        display: flex;
-        border-top: 1px solid #e1e1e1;
-        background-color: #f9f9f9;
-    }
-
-    .chat-input input {
-        flex-grow: 1;
-        padding: 10px 15px;
-        border: 1px solid #e1e1e1;
-        border-radius: 20px;
-        outline: none;
-    }
-
-    .chat-input button {
-        background-color: #00b7bd;
-        color: white;
-        border: none;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-left: 10px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    .chat-input button:hover {
-        background-color: #008489;
-    }
-
-    .typing-indicator {
-        display: flex;
-        align-items: center;
-        margin: 10px 0;
-    }
-
-    .typing-dots {
-        display: flex;
-        padding: 6px 10px;
-    }
-
-    .typing-dots .dot {
-        width: 8px;
-        height: 8px;
-        margin: 0 2px;
-        background-color: #aaa;
-        border-radius: 50%;
-        animation: typing-dot 1.5s infinite ease-in-out;
-    }
-
-    .typing-dots .dot:nth-child(2) {
-        animation-delay: 0.2s;
-    }
-
-    .typing-dots .dot:nth-child(3) {
-        animation-delay: 0.4s;
-    }
-
-    @@keyframes typing-dot {
-        0%, 60%, 100% { transform: translateY(0); }
-        30% { transform: translateY(-5px); }
-    }
-
-    @@media (max-width: 768px) {
-        .book-grid {
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 20px;
-        }
-
-        .category-list {
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .category-item {
-            min-width: 100px;
-        }
-
-        .section-title h2 {
-            font-size: 20px;
-        }
-
-        .chat-window {
-            width: 300px;
-            height: 400px;
-            bottom: 80px;
-            right: 10px;
-        }
-    }
-
-    @@media (max-width: 480px) {
-        .book-grid {
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 15px;
-        }
-
-        .book-card img {
-            height: 150px;
-        }
-
-        .book-title {
-            font-size: 1em;
-        }
-
-        .chat-window {
-            width: 90%;
-            height: 400px;
-            right: 5%;
-            bottom: 80px;
-        }
-    }
+}
 </style>
-
-<script>
-$(document).ready(function() {
-    // Chat bubble click handler
-    $('#chatBubble').on('click', function() {
-        $('#chatWindow').css('display', 'flex');
-        $('#chatBubble').hide();
-        $('#chatMessages').scrollTop($('#chatMessages')[0].scrollHeight);
-    });
-
-    // Minimize chat window
-    $('#minimizeChat').on('click', function() {
-        $('#chatWindow').hide();
-        $('#chatBubble').show();
-    });
-
-    // Close chat window
-    $('#closeChat').on('click', function() {
-        $('#chatWindow').hide();
-        $('#chatBubble').show();
-    });
-
-    // Send message
-    $('#sendMessage').on('click', function() {
-        sendUserMessage();
-    });
-
-    // Send message on Enter key
-    $('#userInput').on('keypress', function(e) {
-        if (e.which === 13) {
-            sendUserMessage();
-        }
-    });
-
-    function sendUserMessage() {
-        var userMessage = $('#userInput').val().trim();
-        if (userMessage === '') return;
-
-        // Add user message to chat
-        appendUserMessage(userMessage);
-        $('#userInput').val('');
-
-        // Show typing indicator
-        showTypingIndicator();
-
-        // Send message to the server using AJAX
-        $.ajax({
-            url: '@Url.Action("SendChatBotMessage", "Chat")',
-            type: 'POST',
-            data: { content: userMessage },
-            success: function(response) {
-                // Remove typing indicator
-                removeTypingIndicator();
-
-                // Add bot response to chat
-                if (response.botResponse && response.botResponse.content) {
-                    appendBotMessage(response.botResponse.content);
-                } else {
-                    appendBotMessage("Xin lỗi, tôi không thể xử lý yêu cầu của bạn lúc này.");
-                }
-            },
-            error: function() {
-                // Remove typing indicator
-                removeTypingIndicator();
-
-                // Show error message
-                appendBotMessage("Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau.");
-            }
-        });
-    }
-
-    function appendUserMessage(message) {
-        var messageHtml = `
-            <div class="user-message">
-                <div class="message-content">
-                    ${message}
-                </div>
-            </div>
-        `;
-        $('#chatMessages').append(messageHtml);
-        scrollToBottom();
-    }
-
-    function appendBotMessage(message) {
-        var messageHtml = `
-            <div class="bot-message">
-                <div class="bot-avatar">
-                    <i class="fa fa-robot"></i>
-                </div>
-                <div class="message-content">
-                    ${message}
-                </div>
-            </div>
-        `;
-        $('#chatMessages').append(messageHtml);
-        scrollToBottom();
-    }
-
-    function showTypingIndicator() {
-        var indicatorHtml = `
-            <div class="bot-message typing-indicator" id="typingIndicator">
-                <div class="bot-avatar">
-                    <i class="fa fa-robot"></i>
-                </div>
-                <div class="message-content">
-                    <div class="typing-dots">
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                    </div>
-                </div>
-            </div>
-        `;
-        $('#chatMessages').append(indicatorHtml);
-        scrollToBottom();
-    }
-
-    function removeTypingIndicator() {
-        $('#typingIndicator').remove();
-    }
-
-    function scrollToBottom() {
-        $('#chatMessages').scrollTop($('#chatMessages')[0].scrollHeight);
-    }
-});
-</script>

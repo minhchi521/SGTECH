@@ -50,26 +50,21 @@
             <span>SGTech Assistant</span>
         </div>
         <div class="chat-actions">
-            <button id="minimizeChat" class="btn-action">
-                <i class="fa fa-minus"></i>
-            </button>
             <button id="closeChat" class="btn-action">
                 <i class="fa fa-times"></i>
             </button>
         </div>
     </div>
-
     <div id="chatMessages" class="chat-messages">
         <div class="bot-message">
             <div class="bot-avatar">
                 <i class="fa fa-robot"></i>
             </div>
             <div class="message-content">
-                Chào mừng bạn đến với SGTech Assistant! Tôi có thể giúp gì cho bạn?
+                Chào bạn! Tôi có thể giúp gì cho bạn?
             </div>
         </div>
     </div>
-
     <div class="chat-input">
         <input type="text" id="userInput" placeholder="Nhập tin nhắn..." />
         <button id="sendMessage">
@@ -112,11 +107,11 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
-    .category-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        background-color: #e9ecef;
-    }
+        .category-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background-color: #e9ecef;
+        }
 
     .category-icon {
         font-size: 24px;
@@ -136,11 +131,11 @@
         padding-bottom: 10px;
     }
 
-    .section-title h2 {
-        font-size: 24px;
-        margin: 0;
-        color: #333;
-    }
+        .section-title h2 {
+            font-size: 24px;
+            margin: 0;
+            color: #333;
+        }
 
     .view-all {
         color: #00b7bd;
@@ -149,10 +144,10 @@
         transition: color 0.3s ease;
     }
 
-    .view-all:hover {
-        color: #008489;
-        text-decoration: underline;
-    }
+        .view-all:hover {
+            color: #008489;
+            text-decoration: underline;
+        }
 
     /* Product grid styling - this is the key part for horizontal layout */
     .book-grid {
@@ -176,33 +171,33 @@
         height: 100%;
     }
 
-    .book-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-    }
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
 
-    .book-card a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 200px;
-        overflow: hidden;
-        background-color: #f8f9fa;
-    }
+        .book-card a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            overflow: hidden;
+            background-color: #f8f9fa;
+        }
 
-    .book-card img {
-        width: auto;
-        max-width: 100%;
-        height: 200px;
-        object-fit: contain; /* Changed from cover to contain for better product display */
-        display: block;
-        margin: 0 auto;
-        transition: transform 0.3s ease;
-    }
+        .book-card img {
+            width: auto;
+            max-width: 100%;
+            height: 200px;
+            object-fit: contain; /* Changed from cover to contain for better product display */
+            display: block;
+            margin: 0 auto;
+            transition: transform 0.3s ease;
+        }
 
-    .book-card:hover img {
-        transform: scale(1.05);
-    }
+        .book-card:hover img {
+            transform: scale(1.05);
+        }
 
     .book-info {
         padding: 15px;
@@ -239,56 +234,45 @@
     }
 
     /* Floating Chat Styles */
-    .chat-bubble {
+  .chat-bubble {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        width: 60px;
-        height: 60px;
-        background-color: #00b7bd;
-        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        background-color: #007bff;
         color: white;
+        border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         z-index: 1000;
-        transition: all 0.3s ease;
-    }
-
-    .chat-bubble i {
-        font-size: 24px;
-    }
-
-    .chat-bubble:hover {
-        transform: scale(1.1);
-        background-color: #008489;
     }
 
     .chat-window {
-        display: none;
         position: fixed;
-        bottom: 90px;
+        bottom: 20px;
         right: 20px;
-        width: 350px;
-        height: 450px;
+        width: 300px;
+        height: 400px;
         background-color: white;
         border-radius: 10px;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-        z-index: 1000;
-        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        display: none;
         flex-direction: column;
+        z-index: 1001;
+        overflow: hidden;
     }
 
     .chat-header {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px 15px;
-        background-color: #00b7bd;
-        color: white;
-        border-radius: 10px 10px 0 0;
     }
 
     .chat-title {
@@ -297,61 +281,42 @@
         font-weight: bold;
     }
 
-    .chat-title i {
-        margin-right: 8px;
-    }
-
-    .chat-actions {
-        display: flex;
-        gap: 5px;
-    }
-
     .btn-action {
-        background: transparent;
+        background: none;
         border: none;
         color: white;
-        font-size: 16px;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        transition: background-color 0.3s;
-    }
-
-    .btn-action:hover {
-        background-color: rgba(255, 255, 255, 0.2);
     }
 
     .chat-messages {
-        flex-grow: 1;
-        padding: 15px;
+        flex: 1;
+        padding: 10px;
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        height: calc(100% - 110px);
     }
 
     .bot-message, .user-message {
-        display: flex;
-        max-width: 80%;
         margin-bottom: 10px;
+        max-width: 80%;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .bot-message {
+        align-self: flex-start;
     }
 
     .user-message {
-        margin-left: auto;
+        align-self: flex-end;
         flex-direction: row-reverse;
     }
 
     .bot-avatar {
-        width: 32px;
-        height: 32px;
-        background-color: #00b7bd;
+        width: 25px;
+        height: 25px;
+        background-color: #eaeaea;
         border-radius: 50%;
-        color: white;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -359,254 +324,202 @@
     }
 
     .message-content {
+        padding: 8px 12px;
+        border-radius: 15px;
+    }
+
+    .bot-message .message-content {
         background-color: #f1f1f1;
-        padding: 10px 15px;
-        border-radius: 18px;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        color: #333;
     }
 
     .user-message .message-content {
-        background-color: #00b7bd;
+        background-color: #007bff;
         color: white;
-        margin-right: 8px;
     }
 
     .chat-input {
-        padding: 10px 15px;
+        padding: 10px;
         display: flex;
-        border-top: 1px solid #e1e1e1;
-        background-color: #f9f9f9;
+        border-top: 1px solid #eaeaea;
     }
 
     .chat-input input {
-        flex-grow: 1;
-        padding: 10px 15px;
-        border: 1px solid #e1e1e1;
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
         border-radius: 20px;
         outline: none;
     }
 
     .chat-input button {
-        background-color: #00b7bd;
+        background-color: #007bff;
         color: white;
         border: none;
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         border-radius: 50%;
-        margin-left: 10px;
+        margin-left: 8px;
         cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    .chat-input button:hover {
-        background-color: #008489;
     }
 
     .typing-indicator {
         display: flex;
         align-items: center;
-        margin: 10px 0;
+        margin-bottom: 10px;
     }
 
     .typing-dots {
         display: flex;
-        padding: 6px 10px;
     }
 
-    .typing-dots .dot {
-        width: 8px;
-        height: 8px;
-        margin: 0 2px;
-        background-color: #aaa;
+    .typing-dots span {
+        width: 5px;
+        height: 5px;
+        margin: 0 1px;
+        background: #999;
         border-radius: 50%;
-        animation: typing-dot 1.5s infinite ease-in-out;
+        opacity: 0.4;
+        animation: typing 1s infinite;
     }
 
-    .typing-dots .dot:nth-child(2) {
-        animation-delay: 0.2s;
+    .typing-dots span:nth-child(1) {
+        animation-delay: 0s;
     }
 
-    .typing-dots .dot:nth-child(3) {
-        animation-delay: 0.4s;
+    .typing-dots span:nth-child(2) {
+        animation-delay: 0.3s;
     }
 
-    @@keyframes typing-dot {
-        0%, 60%, 100% { transform: translateY(0); }
-        30% { transform: translateY(-5px); }
+    .typing-dots span:nth-child(3) {
+        animation-delay: 0.6s;
     }
 
-    @@media (max-width: 768px) {
-        .book-grid {
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 20px;
+    @@keyframes typing {
+        0% {
+            opacity: 0.4;
+            transform: translateY(0);
         }
-
-        .category-list {
-            justify-content: center;
-            gap: 15px;
+        50% {
+            opacity: 1;
+            transform: translateY(-5px);
         }
-
-        .category-item {
-            min-width: 100px;
-        }
-
-        .section-title h2 {
-            font-size: 20px;
-        }
-
-        .chat-window {
-            width: 300px;
-            height: 400px;
-            bottom: 80px;
-            right: 10px;
-        }
-    }
-
-    @@media (max-width: 480px) {
-        .book-grid {
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 15px;
-        }
-
-        .book-card img {
-            height: 150px;
-        }
-
-        .book-title {
-            font-size: 1em;
-        }
-
-        .chat-window {
-            width: 90%;
-            height: 400px;
-            right: 5%;
-            bottom: 80px;
+        100% {
+            opacity: 0.4;
+            transform: translateY(0);
         }
     }
 </style>
 
 <script>
-$(document).ready(function() {
-    // Chat bubble click handler
-    $('#chatBubble').on('click', function() {
-        $('#chatWindow').css('display', 'flex');
-        $('#chatBubble').hide();
-        $('#chatMessages').scrollTop($('#chatMessages')[0].scrollHeight);
-    });
+    document.addEventListener('DOMContentLoaded', function () {
+        // Show/hide chat functionality
+        document.getElementById('chatBubble').addEventListener('click', function () {
+            document.getElementById('chatWindow').style.display = 'flex';
+            this.style.display = 'none';
+            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+        });
 
-    // Minimize chat window
-    $('#minimizeChat').on('click', function() {
-        $('#chatWindow').hide();
-        $('#chatBubble').show();
-    });
+        document.getElementById('closeChat').addEventListener('click', function () {
+            document.getElementById('chatWindow').style.display = 'none';
+            document.getElementById('chatBubble').style.display = 'flex';
+        });
 
-    // Close chat window
-    $('#closeChat').on('click', function() {
-        $('#chatWindow').hide();
-        $('#chatBubble').show();
-    });
+        // Send message functionality
+        function sendMessage() {
+            var userInput = document.getElementById('userInput');
+            var message = userInput.value.trim();
 
-    // Send message
-    $('#sendMessage').on('click', function() {
-        sendUserMessage();
-    });
+            if (message === '') return;
 
-    // Send message on Enter key
-    $('#userInput').on('keypress', function(e) {
-        if (e.which === 13) {
-            sendUserMessage();
+            // Add user message
+            var chatMessages = document.getElementById('chatMessages');
+            var userMessageDiv = document.createElement('div');
+            userMessageDiv.className = 'user-message';
+            userMessageDiv.innerHTML = '<div class="message-content">' + message + '</div>';
+            chatMessages.appendChild(userMessageDiv);
+
+            // Clear input
+            userInput.value = '';
+
+            // Show typing indicator
+            var typingIndicator = document.createElement('div');
+            typingIndicator.className = 'bot-message';
+            typingIndicator.id = 'typingIndicator';
+            typingIndicator.innerHTML =
+                '<div class="bot-avatar"><i class="fa fa-robot"></i></div>' +
+                '<div class="message-content"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
+            chatMessages.appendChild(typingIndicator);
+
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Send to server using AJAX
+            fetch('/Chat/SendChatBotMessage', {  // Fixed endpoint URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: 'content=' + encodeURIComponent(message)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Remove typing indicator
+                    var indicator = document.getElementById('typingIndicator');
+                    if (indicator) {
+                        chatMessages.removeChild(indicator);
+                    }
+
+                    if (data.error) {
+                        // Display error message
+                        var errorDiv = document.createElement('div');
+                        errorDiv.className = 'bot-message';
+                        errorDiv.innerHTML =
+                            '<div class="bot-avatar"><i class="fa fa-robot"></i></div>' +
+                            '<div class="message-content">' + data.error + '</div>';
+                        chatMessages.appendChild(errorDiv);
+                    } else {
+                        // Display bot response
+                        var botMessageDiv = document.createElement('div');
+                        botMessageDiv.className = 'bot-message';
+                        botMessageDiv.innerHTML =
+                            '<div class="bot-avatar"><i class="fa fa-robot"></i></div>' +
+                            '<div class="message-content">' + data.botResponse.content + '</div>';
+                        chatMessages.appendChild(botMessageDiv);
+                    }
+
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+
+                    // Remove typing indicator
+                    var indicator = document.getElementById('typingIndicator');
+                    if (indicator) {
+                        chatMessages.removeChild(indicator);
+                    }
+
+                    // Display error message
+                    var errorDiv = document.createElement('div');
+                    errorDiv.className = 'bot-message';
+                    errorDiv.innerHTML =
+                        '<div class="bot-avatar"><i class="fa fa-robot"></i></div>' +
+                        '<div class="message-content">Xin lỗi, không thể kết nối với máy chủ. Vui lòng thử lại sau.</div>';
+                    chatMessages.appendChild(errorDiv);
+
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                });
         }
-    });
 
-    function sendUserMessage() {
-        var userMessage = $('#userInput').val().trim();
-        if (userMessage === '') return;
-
-        // Add user message to chat
-        appendUserMessage(userMessage);
-        $('#userInput').val('');
-
-        // Show typing indicator
-        showTypingIndicator();
-
-        // Send message to the server using AJAX
-        $.ajax({
-            url: '@Url.Action("SendChatBotMessage", "Chat")',
-            type: 'POST',
-            data: { content: userMessage },
-            success: function(response) {
-                // Remove typing indicator
-                removeTypingIndicator();
-
-                // Add bot response to chat
-                if (response.botResponse && response.botResponse.content) {
-                    appendBotMessage(response.botResponse.content);
-                } else {
-                    appendBotMessage("Xin lỗi, tôi không thể xử lý yêu cầu của bạn lúc này.");
-                }
-            },
-            error: function() {
-                // Remove typing indicator
-                removeTypingIndicator();
-
-                // Show error message
-                appendBotMessage("Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau.");
+        // Add event listeners
+        document.getElementById('sendMessage').addEventListener('click', sendMessage);
+        document.getElementById('userInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
             }
         });
-    }
-
-    function appendUserMessage(message) {
-        var messageHtml = `
-            <div class="user-message">
-                <div class="message-content">
-                    ${message}
-                </div>
-            </div>
-        `;
-        $('#chatMessages').append(messageHtml);
-        scrollToBottom();
-    }
-
-    function appendBotMessage(message) {
-        var messageHtml = `
-            <div class="bot-message">
-                <div class="bot-avatar">
-                    <i class="fa fa-robot"></i>
-                </div>
-                <div class="message-content">
-                    ${message}
-                </div>
-            </div>
-        `;
-        $('#chatMessages').append(messageHtml);
-        scrollToBottom();
-    }
-
-    function showTypingIndicator() {
-        var indicatorHtml = `
-            <div class="bot-message typing-indicator" id="typingIndicator">
-                <div class="bot-avatar">
-                    <i class="fa fa-robot"></i>
-                </div>
-                <div class="message-content">
-                    <div class="typing-dots">
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                    </div>
-                </div>
-            </div>
-        `;
-        $('#chatMessages').append(indicatorHtml);
-        scrollToBottom();
-    }
-
-    function removeTypingIndicator() {
-        $('#typingIndicator').remove();
-    }
-
-    function scrollToBottom() {
-        $('#chatMessages').scrollTop($('#chatMessages')[0].scrollHeight);
-    }
-});
+    });
 </script>
